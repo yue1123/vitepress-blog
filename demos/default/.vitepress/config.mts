@@ -3,6 +3,7 @@ import { defineConfig } from 'vitepress-blog'
 export default defineConfig({
   srcDir: './',
   title: 'test demo',
+  base: '/vitepress-blog/default/',
   themeConfig: {
     name: 'yue1123',
     nav: [
