@@ -39,7 +39,7 @@ tags:
 
 ## 主题
 
-- default [预览](https://yue1123.github.io/vitepress-blog/)
+- default [预览](https://yue1123.github.io/vitepress-blog/default/)
 
 目前只开发了一个默认的主题，欢迎小伙伴们贡献自己的主题
 
