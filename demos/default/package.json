@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "vitepress-blog": "workspace:*",
+    "vitepress": "1.0.0-alpha.34"
+  },
+  "scripts": {
+    "blog:dev": "vitepress dev ./",
+    "blog:build": "vitepress build ./",
+    "blog:serve": "vitepress serve ./"
+  }
+}
