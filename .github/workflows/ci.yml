@@ -17,14 +17,8 @@ jobs:
         with:
           version: 7
 
-      - name: cd to demos
-        run: cd ./demos/default
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Build
-        run: pnpm run blog:build
+      - name: build
+        run: cd ./demos/default && npm install && pnpm run blog:build
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
