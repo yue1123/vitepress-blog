@@ -39,7 +39,7 @@ tags:
 
 ## theme
 
-- default [Preview](https://yue1123.github.io/vitepress-blog/)
+- default [Preview](https://yue1123.github.io/vitepress-blog/default/)
 
 At present, only one default theme has been developed, and friends are welcome to contribute their own themes
 
