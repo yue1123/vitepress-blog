@@ -1,4 +1,4 @@
-#vitepress-blog
+# vitepress-blog
 
 Based on the static blog generation of vitepress, build a blog of your own in five minutes
 
