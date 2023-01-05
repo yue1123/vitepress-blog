@@ -25,7 +25,8 @@
   "scripts": {
     "dev": "rollup -c --bundleConfigAsCjs -w",
     "build": "rimraf dist && tsc && rollup -c --bundleConfigAsCjs",
-    "link_pnpm": "pnpm link --global"
+    "link_pnpm": "pnpm link --global",
+    "build_theme_demo": "pnpm run build && pnpm run -C demos/default blog:build"
   },
   "files": [
     "dist",

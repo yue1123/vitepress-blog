@@ -1,7 +1,10 @@
 import { defineConfig } from 'vitepress-blog'
+import { resolve } from 'node:path'
 
 export default defineConfig({
   srcDir: './',
+  outDir: resolve(process.cwd(), '../../build/defaultTheme'),
+  cacheDir: resolve(process.cwd(), './node_modules/.vitepress'),
   title: 'test demo',
   base: '/vitepress-blog/default/',
   themeConfig: {

@@ -17,12 +17,15 @@ jobs:
         with:
           version: 7
 
-      - name: build
-        run: cd ./demos/default && npm install && pnpm run blog:build
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build
+        run: pnpm run build_theme_demo
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: .vitepress/dist
+          FOLDER: ~/build
