@@ -6,7 +6,7 @@ export default defineConfig({
   outDir: resolve(process.cwd(), '../../build/defaultTheme'),
   cacheDir: resolve(process.cwd(), './node_modules/.vitepress'),
   title: 'test demo',
-  base: '/vitepress-blog/default/',
+  base: '/vitepress-blog/defaultTheme/',
   themeConfig: {
     name: 'yue1123',
     nav: [
