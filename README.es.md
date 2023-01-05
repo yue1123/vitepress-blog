@@ -39,7 +39,7 @@ tags:
 
 ## theme
 
-- default [Preview](https://yue1123.github.io/vitepress-blog/default/)
+- default [Preview](https://yue1123.github.io/vitepress-blog/defaultTheme/)
 
 At present, only one default theme has been developed, and friends are welcome to contribute their own themes
 
@@ -80,7 +80,7 @@ vitepress-blog init ./
 # ? Would you like to add start,build,preview commands to 'package.json' > yes
 ```
 
-## 3. Run/package
+## 3. Run & build
 
 After the initialization is successful, you can run the blog
 

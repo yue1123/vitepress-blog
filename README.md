@@ -39,7 +39,7 @@ tags:
 
 ## 主题
 
-- default [预览](https://yue1123.github.io/vitepress-blog/default/)
+- default [预览](https://yue1123.github.io/vitepress-blog/defaultTheme/)
 
 目前只开发了一个默认的主题，欢迎小伙伴们贡献自己的主题
 
@@ -80,7 +80,7 @@ vitepress-blog init ./
 # ? Would you like to add start,build,preview commands to 'package.json' > yes
 ```
 
-## 3. 运行/打包
+## 3. 运行 & 打包
 
 初始化成功后，即可运行 blog
 
