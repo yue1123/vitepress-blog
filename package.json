@@ -74,6 +74,7 @@
     "bootstrap-icons-vue": "^1.8.1",
     "chalk": "^5.2.0",
     "commander": "^9.4.1",
+    "cross-spawn": "^7.0.3",
     "deepmerge": "^4.2.2",
     "markdown-it-footnote": "^3.0.3",
     "markdown-it-image-lazy-loading": "^1.2.0",

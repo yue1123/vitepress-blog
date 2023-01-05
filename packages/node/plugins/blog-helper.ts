@@ -1,7 +1,8 @@
 import path from 'path'
 import fs from 'fs'
-import type { Plugin } from 'vite'
+import type { Plugin, ResolvedConfig } from 'vite'
 import { type UserThemeConfig } from '../index'
+import { getFileUpdateTime, getFileCreateTime } from '../utils/index'
 
 const dateCache = Object.create(null)
 const snippetsReg = /[\w\u4e00-\u9fa5\,\.\!\，\。\！\"\"\'\'\‘\’\“\”\:\：]+/g
@@ -11,18 +12,26 @@ const linkReg = /\[.+\]\(.+\)/g
 const mdFrontmatter = /\{\{\s+\$frontmatter\s+\}\}/g
 export default function blogHelper(userConfig: UserThemeConfig): Plugin {
   const { themeConfig = {} } = userConfig
+  let config: any
   return {
     name: 'blog-helper',
     enforce: 'pre',
+    configResolved(resolvedConfig) {
+      // 存储最终解析的配置
+      config = resolvedConfig
+    },
     async transform(code, id) {
       if (!id.endsWith('.md') || !/\/posts\//.test(id)) return
       let createTime: string | null = dateCache[id] || null
       let tags: string[] = []
       if (!dateCache[id]) {
-        const stat = fs.statSync(id)
-        console.log(stat)
-        if (!!stat) {
-          createTime = dateCache[id] = stat.birthtime.getTime() + ''
+        if (config.command === 'dev') {
+          const stat = fs.statSync(id)
+          if (!!stat) {
+            createTime = dateCache[id] = stat.birthtime.getTime() + ''
+          }
+        } else {
+          createTime = dateCache[id] = (await getFileCreateTime(id)) + ''
         }
       }
       // get tags
@@ -48,7 +57,6 @@ export default function blogHelper(userConfig: UserThemeConfig): Plugin {
     }
   }
 }
-
 function appendFrontmatter(code: string, data: Record<string, any>) {
   const res = code.match(frontmatterReg)
   const frontmatterStartIndex = 0

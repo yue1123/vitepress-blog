@@ -8,7 +8,7 @@ declare module 'markdown-it-katex'
 declare module 'markdown-it-image-lazy-loading'
 declare module 'markdown-it-textual-uml'
 declare module 'prompts'
-
+declare module 'cross-spawn'
 declare module '*.json' {
   const type: Record<any, any>
   export default type
