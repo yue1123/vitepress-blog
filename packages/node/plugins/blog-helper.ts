@@ -34,7 +34,8 @@ export default function blogHelper(userConfig: UserThemeConfig): Plugin {
         } else {
           console.log('github actions')
           createTime = dateCache[id] = (await getFileCreateTime(id)) + ''
-          console.log(new Date(createTime))
+          console.log(id, createTime)
+          console.log(new Date(+createTime))
         }
       }
       // get tags
