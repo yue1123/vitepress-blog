@@ -28,6 +28,7 @@ export function getFileCreateTime(filePath: string) {
     let output = ''
     child.stdout.on('data', (d: Buffer) => {
       output = String(d)
+      console.log(output)
     })
     child.on('close', () => {
       resolve(+new Date(output))
