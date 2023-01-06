@@ -26,17 +26,18 @@ export default function blogHelper(userConfig: UserThemeConfig): Plugin {
       let tags: string[] = []
       if (!dateCache[id]) {
         console.log(config.command, '\n')
-        if (config.command !== 'build') {
-          const stat = fs.statSync(id)
-          if (!!stat) {
-            createTime = dateCache[id] = stat.birthtime.getTime() + ''
-          }
-        } else {
-          console.log('github actions')
-          createTime = dateCache[id] = (await getFileCreateTime(id)) + ''
-          console.log('getFileUpdateTime', id, new Date(await getFileUpdateTime(id)))
-          console.log('createTime', id, new Date(+createTime))
-        }
+        // if (config.command !== 'build') {
+        //   const stat = fs.statSync(id)
+        //   if (!!stat) {
+        //     createTime = dateCache[id] = stat.birthtime.getTime() + ''
+        //   }
+        // } else {
+        console.log('github actions')
+        createTime = dateCache[id] = (await getFileCreateTime(id)) + ''
+        console.log('getFileUpdateTime', id, new Date(await getFileUpdateTime(id)))
+        console.log(createTime)
+        console.log('createTime', id, new Date(+createTime))
+        // }
       }
       // get tags
       if (themeConfig.filePathToTags) {

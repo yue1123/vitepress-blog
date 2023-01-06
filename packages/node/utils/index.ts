@@ -7,7 +7,7 @@ import { spawn } from 'cross-spawn'
  */
 export function getFileUpdateTime(filePath: string) {
   return new Promise<number>((resolve, reject) => {
-    const child = spawn('git', ['log', '-1', '--pretty=format:"%ct"', filePath])
+    const child = spawn('git', ['log', '-1', '--pretty=format:"%ci"', filePath])
     let output = ''
     child.stdout.on('data', (d: Buffer) => (output += String(d)))
     child.on('close', () => {
@@ -24,11 +24,11 @@ export function getFileUpdateTime(filePath: string) {
  */
 export function getFileCreateTime(filePath: string) {
   return new Promise<number>((resolve, reject) => {
-    const child = spawn('git', ['log', '--pretty=format:"%ct"', '--', filePath, '| tail -1'])
+    const child = spawn('git', ['log', '--pretty=format:"%ci"', '--', filePath, '| tail -1'])
     let output = ''
     child.stdout.on('data', (d: Buffer) => {
       output = String(d)
-      console.log(output)
+      console.log('output', output)
     })
     child.on('close', () => {
       resolve(+new Date(output))
