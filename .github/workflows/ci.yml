@@ -17,6 +17,9 @@ jobs:
         with:
           node-version: 16
 
+      - name: echo git log
+        run: git log --reverse
+        
       - uses: pnpm/action-setup@v2.2.2
         with:
           version: 7
