@@ -25,7 +25,7 @@ export default function blogHelper(userConfig: UserThemeConfig): Plugin {
       let createTime: string | null = dateCache[id] || null
       let tags: string[] = []
       if (!dateCache[id]) {
-        if (config.command === 'dev') {
+        if (config.command !== 'build') {
           const stat = fs.statSync(id)
           if (!!stat) {
             createTime = dateCache[id] = stat.birthtime.getTime() + ''
