@@ -1,6 +1,6 @@
 import path from 'path'
 import fs from 'fs'
-import type { Plugin, ResolvedConfig } from 'vite'
+import type { Plugin } from 'vite'
 import { type UserThemeConfig } from '../index'
 import { getFileUpdateTime, getFileCreateTime } from '../utils/index'
 
@@ -17,7 +17,6 @@ export default function blogHelper(userConfig: UserThemeConfig): Plugin {
     name: 'blog-helper',
     enforce: 'pre',
     configResolved(resolvedConfig) {
-      // 存储最终解析的配置
       config = resolvedConfig
     },
     async transform(code, id) {
@@ -25,19 +24,14 @@ export default function blogHelper(userConfig: UserThemeConfig): Plugin {
       let createTime: string | null = dateCache[id] || null
       let tags: string[] = []
       if (!dateCache[id]) {
-        console.log(config.command, '\n')
-        // if (config.command !== 'build') {
-        //   const stat = fs.statSync(id)
-        //   if (!!stat) {
-        //     createTime = dateCache[id] = stat.birthtime.getTime() + ''
-        //   }
-        // } else {
-        console.log('github actions')
-        createTime = dateCache[id] = (await getFileCreateTime(id)) + ''
-        console.log('getFileUpdateTime', id, new Date(await getFileUpdateTime(id)))
-        console.log(createTime)
-        console.log('createTime', id, new Date(+createTime))
-        // }
+        if (config.command !== 'build') {
+          const stat = fs.statSync(id)
+          if (!!stat) {
+            createTime = dateCache[id] = stat.birthtime.getTime() + ''
+          }
+        } else {
+          createTime = dateCache[id] = (await getFileCreateTime(id)) + ''
+        }
       }
       // get tags
       if (themeConfig.filePathToTags) {

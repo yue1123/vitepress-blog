@@ -109,5 +109,13 @@ pnpm run blog:build
 ##Note
 
 1. It is recommended to read the [vitepress](https://vitepress.vuejs.org/) document for in-depth use
-2. Set the name of the github warehouse to `username.github.io` (so that you can get a domain name pointing to the current warehouse)
-3. Configure git pages: warehouse Settings > Pages > select `gh-pages` branch root directory > save
+2. If you use github-action deployment, be sure to set checkout `fetch-depth` to zero to ensure that the article creation time is correct
+```yml
+- name: Check out repo's default branch
+  uses: actions/checkout@v3
+  with:
+    ref: "master"
+    fetch-depth: 0
+```
+3. Set the name of the github warehouse to `username.github.io` (so that you can get a domain name pointing to the current warehouse)
+4. Configure git pages: warehouse Settings > Pages > select `gh-pages` branch root directory > save

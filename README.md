@@ -109,5 +109,14 @@ pnpm run blog:build
 ## Note
 
 1. 建议阅读一下 [vitepress](https://vitepress.vuejs.org/) 文档以便深入使用
-2. github 的仓库设置名字为`用户名.github.io`（这样就可以获得一个域名指向当前仓库）
-3. 配置 git pages: 仓库 Settings > Pages > 选择 `gh-pages` 分支根目录 > 保存
+2. 如果使用 github-action 部署，请务必将 checkout `fetch-depth`设置为零，以保证文章创建时间正确
+```yml
+- name: Check out repo's default branch
+  uses: actions/checkout@v3
+  with:
+    ref: "master"
+    fetch-depth: 0
+```
+
+3. github 的仓库设置名字为`用户名.github.io`（这样就可以获得一个域名指向当前仓库）
+4. 配置 git pages: 仓库 Settings > Pages > 选择 `gh-pages` 分支根目录 > 保存
