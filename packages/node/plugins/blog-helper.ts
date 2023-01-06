@@ -32,7 +32,9 @@ export default function blogHelper(userConfig: UserThemeConfig): Plugin {
             createTime = dateCache[id] = stat.birthtime.getTime() + ''
           }
         } else {
+          console.log('github actions')
           createTime = dateCache[id] = (await getFileCreateTime(id)) + ''
+          console.log(new Date(createTime))
         }
       }
       // get tags
