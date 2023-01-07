@@ -24,11 +24,11 @@ const nodePlugins = [
     preventAssignment: true
   })
 ]
-const node = defineConfig({
-  input: './packages/node/index.ts',
+const main = defineConfig({
+  input: './packages/main/index.ts',
   external,
   output: {
-    dir: './dist/node/',
+    dir: './dist/main/',
     exports: 'named',
     format: 'esm',
     preserveModules: true,
@@ -37,21 +37,21 @@ const node = defineConfig({
   plugins: nodePlugins
 })
 const command = defineConfig({
-  input: './packages/node/command.ts',
+  input: './packages/main/command.ts',
   external,
   output: {
-    dir: './dist/node/',
+    dir: './dist/main/',
     format: 'esm',
     banner: getBanner(pkg)
   },
   plugins: nodePlugins
 })
 
-const client = defineConfig({
-  input: './packages/client/index.ts',
+const themeHelper = defineConfig({
+  input: './packages/themeHelper/index.ts',
   external,
   output: {
-    dir: './dist/client/',
+    dir: './dist/themeHelper/',
     exports: 'named',
     format: 'esm',
     preserveModules: true,
@@ -60,8 +60,26 @@ const client = defineConfig({
   plugins: [
     nodeResolve({ preferBuiltins: true }),
     typescript(),
+    // copy .d.ts
     copy({
-      targets: [{ src: './packages/client/theme/*', dest: 'dist/client/theme' }]
+      targets: [
+        {
+          src: './dist/themeHelper/index.d.ts',
+          dest: './',
+          rename: 'theme-helper.d.ts',
+          transform: (contents) => contents.toString().replace(/\.\//g, './dist/themeHelper/')
+        },
+        {
+          src: './dist/theme/index.d.ts',
+          dest: './',
+          rename: 'theme.d.ts',
+          transform: (contents) => contents.toString().replace(/\.\//g, './dist/theme/')
+        }
+      ]
+    }),
+    // copy theme
+    copy({
+      targets: [{ src: './packages/theme/*', dest: 'dist/theme' }]
     }),
     json()
   ]
@@ -69,15 +87,11 @@ const client = defineConfig({
 
 function getBanner(pkg) {
   return `
-/*!
+/*! 
  * ${pkg.name} v${pkg.version}
  * (c) ${pkg.author}
  * Homepage: ${pkg.homepage || null}
  * Released under the ${pkg.license} License.
  */`.trim()
 }
-module.exports = [
-  node,
-  client,
-  command
-]
+module.exports = [main, themeHelper, command]

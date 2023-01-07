@@ -1,0 +1,8 @@
+{
+  "name": "vitepress-blog-test-theme",
+  "version": "1.0.0",
+  "dependencies": {
+    "bootstrap-icons-vue": "^1.8.1",
+    "sass": "^1.57.1"
+  }
+}

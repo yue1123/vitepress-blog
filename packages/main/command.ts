@@ -3,7 +3,7 @@ import { resolve, join } from 'path'
 import { Command } from 'commander'
 import prompts from 'prompts'
 import chalk from 'chalk'
-import * as themes from '../client/theme/themes'
+import * as themes from '../theme/themes'
 
 const program = new Command()
 const root = process.cwd()

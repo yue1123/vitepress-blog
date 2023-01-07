@@ -1,2 +1,1 @@
-import defaultBlogTheme from './dist/client/theme/index.js';
-export { defaultBlogTheme };
+export { default as defaultBlogTheme } from './dist/theme/default/index';

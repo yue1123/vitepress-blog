@@ -1,2 +1,2 @@
 #!/usr/bin/env node
-import '../dist/node/command.js'
+import '../dist/main/command.js'
