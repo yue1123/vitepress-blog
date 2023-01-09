@@ -1,75 +1,67 @@
 {
-  "name": "vitepress-blog-test",
+  "name": "vitepress-blog",
   "version": "1.0.0",
   "description": "expand vitepress for ssg blog",
-  "main": "./dist/node/index.js",
+  "packageManager": "pnpm@7.9.2",
   "type": "module",
-  "types": "./dist/node/index.d.ts",
+  "main": "./dist/main/index.js",
+  "types": "./dist/main/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/node/index.d.ts",
-      "require": "./dist/node/index.js",
-      "import": "./dist/node/index.js"
+      "types": "./dist/main/index.d.ts",
+      "require": "./dist/main/index.js",
+      "import": "./dist/main/index.js"
     },
     "./theme": {
-      "types": "./theme.d.ts",
-      "default": "./dist/client/theme/index"
+      "default": "./dist/theme/index.js"
     },
     "./theme-helper": {
-      "types": "./theme-helper.d.ts",
-      "default": "./dist/client/index"
+      "default": "./dist/theme-helper/index.js"
     },
     "./package.json": "./package.json"
   },
-  "bin": "./bin/init.js",
-  "scripts": {
-    "dev": "rollup -c --bundleConfigAsCjs -w",
-    "build": "rimraf dist && tsc && rollup -c --bundleConfigAsCjs",
-    "link_pnpm": "pnpm link --global",
-    "build_theme_demo": "pnpm run build && pnpm run -C demos/default blog:build"
-  },
   "files": [
+    "bin",
     "dist",
     "package.json",
     "env.d.ts",
     "README.md",
+    "README.es.md",
     "theme.d.ts",
     "theme-helper.d.ts"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/yue1123/vitepress-blog"
-  },
-  "keywords": [
-    "vitepress",
-    "vitepress-blog",
-    "blog",
-    "SSG",
-    "ssg",
-    "vue-blog"
+  "publishConfig": {},
+  "bin": "./bin/init.js",
+  "workspaces": [
+    "demos/*",
+    "packages/*"
   ],
-  "author": "yue1123",
-  "packageManager": "pnpm@7.9.2",
+  "scripts": {
+    "dev": "rollup -c --bundleConfigAsCjs -w",
+    "build": "rimraf dist && tsc -p ./tsconfig.build.json && rollup -c --bundleConfigAsCjs",
+    "link_pnpm": "pnpm link --global",
+    "build_theme_demo": "pnpm run build && pnpm run -C demos/default blog:build"
+  },
+  "peerDependencies": {
+    "vitepress": "^1.0.0-alpha.33"
+  },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^24.0.0",
     "@rollup/plugin-json": "^6.0.0",
     "@rollup/plugin-node-resolve": "^15.0.1",
-    "@rollup/plugin-replace": "^5.0.2",
-    "@rollup/plugin-typescript": "^10.0.1",
     "@types/node": "^18.11.9",
+    "esbuild": "^0.16.15",
     "rimraf": "^3.0.2",
     "rollup": "^3.9.0",
     "rollup-plugin-copy": "^3.4.0",
-    "rollup-plugin-dts": "^5.1.0",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-scss": "^4.0.0",
-    "rollup-plugin-typescript": "^1.0.1",
-    "rollup-plugin-typescript2": "^0.34.1",
-    "rollup-plugin-vue": "^6.0.0",
+    "rollup-plugin-esbuild": "^5.0.0",
     "tslib": "^2.4.1",
     "typescript": "^4.9.4",
     "vite": "^4.0.3",
-    "vue": "^3.2.45"
+    "@vitepress-blog/theme": "workspace:*",
+    "@vitepress-blog/theme-helper": "workspace:*",
+    "@vitepress-blog/main": "workspace:*",
+    "@vitepress-blog/cli": "workspace:*"
   },
   "dependencies": {
     "bootstrap-icons-vue": "^1.8.1",
@@ -88,6 +80,7 @@
     "markdown-it-textual-uml": "^0.12.0",
     "prompts": "^2.4.2",
     "sass": "^1.57.1",
-    "vitepress": "1.0.0-alpha.33"
+    "vitepress": "1.0.0-alpha.33",
+    "vue": "^3.2.45"
   }
 }

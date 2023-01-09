@@ -1,12 +1,16 @@
+const { resolve } = require('path')
 const { defineConfig } = require('rollup')
 const { nodeResolve } = require('@rollup/plugin-node-resolve')
-const typescript = require('rollup-plugin-typescript')
+const esbuild = require('rollup-plugin-esbuild').default
 const copy = require('rollup-plugin-copy')
 const { builtinModules } = require('module')
 const json = require('@rollup/plugin-json')
-const replace = require('@rollup/plugin-replace')
-const pkg = require('./package.json')
+
+const pkg = require('./package.json') 
+
 const { dependencies, version } = pkg
+const root = process.cwd() 
+
 const external = [
   'vite',
   'vitepress/theme',
@@ -15,15 +19,50 @@ const external = [
 ]
 const nodePlugins = [
   nodeResolve({ preferBuiltins: true }),
-  typescript(),
-  json(),
-  replace({
-    values: {
-      __VERSION__: version
-    },
-    preventAssignment: true
-  })
+  esbuild({
+    define: {
+      __VERSION__: `"${version}"`
+    }
+  }),
+  json()
 ]
+
+const vitepressBlogExport = [
+  resolve(root, './packages/index.ts'),
+  resolve(root, './packages/theme.ts'),
+  resolve(root, './packages/theme-helper.ts')
+]
+const vitepressBlog = defineConfig({
+  input: vitepressBlogExport,
+  external(id) {
+    if (vitepressBlogExport.indexOf(id) !== -1) {
+      return false
+    }
+    return true
+  },
+  output: [
+    {
+      dir: './dist/',
+      exports: 'named',
+      format: 'esm'
+    }
+  ],
+  plugins: [
+    (function replace() {
+      return {
+        transform(code) {
+          const reg = /@vitepress-blog\/([\w\-]*)/
+          if (reg.test(code)) {
+            return code.replace(reg, (_, a) => {
+              return `./${a}/index`
+            })
+          }
+        }
+      }
+    })(),
+    ...nodePlugins
+  ]
+})
 const main = defineConfig({
   input: './packages/main/index.ts',
   external,
@@ -37,10 +76,10 @@ const main = defineConfig({
   plugins: nodePlugins
 })
 const command = defineConfig({
-  input: './packages/main/command.ts',
+  input: './packages/cli/command.ts',
   external,
   output: {
-    dir: './dist/main/',
+    dir: './dist/cli/',
     format: 'esm',
     banner: getBanner(pkg)
   },
@@ -48,10 +87,10 @@ const command = defineConfig({
 })
 
 const themeHelper = defineConfig({
-  input: './packages/themeHelper/index.ts',
+  input: './packages/theme-helper/index.ts',
   external,
   output: {
-    dir: './dist/themeHelper/',
+    dir: './dist/theme-helper/',
     exports: 'named',
     format: 'esm',
     preserveModules: true,
@@ -59,16 +98,16 @@ const themeHelper = defineConfig({
   },
   plugins: [
     nodeResolve({ preferBuiltins: true }),
-    typescript(),
+    esbuild(),
     // copy .d.ts
     copy({
       targets: [
         {
-          src: './dist/themeHelper/index.d.ts',
+          src: './dist/theme-helper/index.d.ts',
           dest: './',
           rename: 'theme-helper.d.ts',
           transform: (contents) => contents.toString().replace(/\.\//g, './dist/themeHelper/')
-        },
+        }, 
         {
           src: './dist/theme/index.d.ts',
           dest: './',
@@ -79,7 +118,18 @@ const themeHelper = defineConfig({
     }),
     // copy theme
     copy({
-      targets: [{ src: './packages/theme/*', dest: 'dist/theme' }]
+      filter(src) {
+        if (/node_modules|package.json/.test(src)) {
+          return false
+        }
+        return true
+      },
+      targets: [
+        {
+          src: './packages/theme/*',
+          dest: 'dist/theme'
+        }
+      ]
     }),
     json()
   ]
@@ -94,4 +144,4 @@ function getBanner(pkg) {
  * Released under the ${pkg.license} License.
  */`.trim()
 }
-module.exports = [main, themeHelper, command]
+module.exports = [main, themeHelper, command, vitepressBlog]

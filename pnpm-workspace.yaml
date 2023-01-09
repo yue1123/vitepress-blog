@@ -1,5 +1,3 @@
 packages:
   - demos/*
-  - packages/theme/*
-  - packages/themeHelper
-  - packages/main
+  - packages/*

@@ -1,7 +1,7 @@
 <template></template>
 
 <script setup lang="ts">
-  import { getScriptAsync } from '../../../../index'
+  import { getScriptAsync } from '@vitepress-blog/theme-helper'
   import { LIGHT_THEME_CONFIG, DARK_THEME_CONFIG } from './config'
   getScriptAsync({
     key: 'particlesJS',

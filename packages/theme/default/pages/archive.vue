@@ -30,7 +30,7 @@
   import { computed } from 'vue'
   import { withBase } from 'vitepress'
   import PostMeta from '../components/PostMeta.vue'
-  import { postList } from 'vitepress-blog/theme-helper'
+  import { postList } from '@vitepress-blog/theme-helper'
 
   type NodeType = 'year' | 'month' | 'post'
   interface ArchivesList {

@@ -9,6 +9,8 @@ declare module 'markdown-it-image-lazy-loading'
 declare module 'markdown-it-textual-uml'
 declare module 'prompts'
 declare module 'cross-spawn'
+
+declare const __VERSION__: string
 declare module '*.json' {
   const type: Record<any, any>
   export default type

@@ -1,5 +1,5 @@
 {
-  "name": "vitepress-blog-test-theme-helper",
+  "name": "@vitepress-blog/theme-helper",
   "version": "1.0.0",
   "dependencies": {
     "vue": "^3.2.45"

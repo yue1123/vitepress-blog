@@ -36,7 +36,7 @@
 <script setup lang="ts">
   import { ref, computed, onBeforeMount } from 'vue'
   import { withBase } from 'vitepress'
-  import { postList } from '../../../index'
+  import { postList } from '@vitepress-blog/theme-helper'
   import PostMeta from '../components/PostMeta.vue'
   const currentTag = ref<string | null>()
   const tagMap: Record<string, any> = Object.create(null)

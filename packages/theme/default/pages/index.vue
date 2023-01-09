@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-  import { postList } from '../../../index'
+  import { postList } from '@vitepress-blog/theme-helper'
   import { useData } from 'vitepress'
   const { localePath } = useData()
 </script>
