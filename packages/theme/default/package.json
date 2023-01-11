@@ -4,8 +4,10 @@
   "main": "./index.ts",
   "module": "./index.ts",
   "peerDependencies": {
-    "vitepress": "^1.0.0-alpha.33",
-    "vitepress-blog": "workspace:*"
+    "vitepress": "^1.0.0-alpha.33"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "dependencies": {
     "@vitepress-blog/theme-helper": "workspace:*",
