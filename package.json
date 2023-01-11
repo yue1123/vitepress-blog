@@ -1,6 +1,6 @@
 {
   "name": "vitepress-blog",
-  "version": "1.1.0-alpha.3",
+  "version": "1.1.0-alpha.4",
   "description": "expand vitepress for ssg blog",
   "packageManager": "pnpm@7.9.2",
   "type": "module",
