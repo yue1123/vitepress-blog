@@ -87,7 +87,6 @@ const getSharedConfig = (userConfig: any) => {
 }
 
 function defineConfig(config: UserThemeConfig): UserThemeConfig {
-  console.log(config)
   return deepmerge(getSharedConfig(config), config)
 }
 
