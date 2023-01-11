@@ -1,10 +1,17 @@
 {
-  "name":"@vitepress-blog/theme-default",
+  "name": "@vitepress-blog-theme/default",
+  "version": "1.0.0-alpha.1",
+  "main": "./index.ts",
+  "module": "./index.ts",
+  "peerDependencies": {
+    "vitepress": "^1.0.0-alpha.33",
+    "vitepress-blog": "workspace:*"
+  },
   "dependencies": {
+    "@vitepress-blog/theme-helper": "workspace:*",
     "bootstrap-icons-vue": "^1.8.1",
     "sass": "^1.57.1",
     "vitepress": "1.0.0-alpha.33",
-    "vue": "^3.2.45",
-    "vitepress-blog": "workspace:*"
+    "vue": "^3.2.45"
   }
 }

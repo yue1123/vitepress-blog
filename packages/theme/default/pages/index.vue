@@ -3,7 +3,8 @@
 </template>
 
 <script setup lang="ts">
-  import { postList } from '@vitepress-blog/theme-helper'
+  import { usePostListWithPagination } from '@vitepress-blog/theme-helper'
   import { useData } from 'vitepress'
   const { localePath } = useData()
+  const { postList } = usePostListWithPagination()
 </script>

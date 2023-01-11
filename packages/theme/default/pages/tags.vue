@@ -15,7 +15,7 @@
       </a>
     </div>
     <div class="post_list-container space-y-4 mt-4">
-      <template v-if="currentTagPost.posts && currentTagPost.posts.length">
+      <template v-if="currentTagPost && currentTagPost.posts && currentTagPost.posts.length">
         <div class="post_list-header">共 {{ currentTagPost.count }} 篇</div>
         <div class="post_list-content space-y-4">
           <div class="post-item space-y-2" v-for="post in currentTagPost.posts">
@@ -36,29 +36,13 @@
 <script setup lang="ts">
   import { ref, computed, onBeforeMount } from 'vue'
   import { withBase } from 'vitepress'
-  import { postList } from '@vitepress-blog/theme-helper'
+  import { useTagMap } from '@vitepress-blog/theme-helper'
   import PostMeta from '../components/PostMeta.vue'
+
+  const tagMap = useTagMap()
   const currentTag = ref<string | null>()
-  const tagMap: Record<string, any> = Object.create(null)
-  for (const post of postList) {
-    if (post.tags) {
-      for (const tag of post.tags) {
-        if (!tagMap[tag]) {
-          tagMap[tag] = {
-            title: tag,
-            count: 0,
-            posts: []
-          }
-        }
-        const cacheObj = tagMap[tag]
-        cacheObj.count += 1
-        cacheObj.posts.push(post)
-      }
-    }
-  }
   const currentTagPost = computed(() => {
     if (currentTag.value) return tagMap[currentTag.value]
-    else return []
   })
 
   function handleClickTag(tag: string) {

@@ -3,8 +3,9 @@ import { resolve, join } from 'path'
 import { Command } from 'commander'
 import prompts from 'prompts'
 import chalk from 'chalk'
-import * as themes from '@vitepress-blog/theme/themes'
+import themeResolver from './themeResolver'
 
+type ThemeConfig = Record<'name' | 'description' | 'previewLink' | 'pages', any>
 function main() {
   const program = new Command()
   const root = process.cwd()
@@ -118,7 +119,8 @@ digraph example1 {
     \`\`\`
 
     还有其他行级排版语法，比如**加粗**和[链接](https://b3log.org)。`
-
+  const installedTheme = themeResolver(root)
+  if (!installedTheme) return
   program
     .name('vitepress-blog')
     .description('Expand vitepress for ssg blog')
@@ -153,8 +155,7 @@ digraph example1 {
         })
         await fs.writeFile(path, JSON.stringify(obj, null, indent), { encoding: 'utf-8' })
       }
-      function getTheme(_theme: string, pages: Record<string, any>) {
-        const theme = pages[_theme]
+      function getThemeConfigTask(theme: ThemeConfig) {
         let themePagesFileTasks = []
         let nav: string[] = []
         if (theme) {
@@ -177,13 +178,13 @@ title: ${item.title}
           throw new Error(`✘ Error: make sure ${theme} has exported pages`)
         }
       }
-      function getThemeList(themes: Record<string, Record<'name' | 'description' | 'previewLink' | 'pages', any>>) {
-        return Object.keys(themes).map((item) => {
-          const { name, previewLink, description } = themes[item]
+      function getThemeList(themes: ThemeConfig[]) {
+        return themes.map((item) => {
+          const { name, previewLink, description } = item
           return {
             title: name,
             description: `${description} ${previewLink}`,
-            value: name
+            value: item
           }
         })
       }
@@ -212,7 +213,7 @@ title: ${item.title}
             type: 'select',
             name: 'theme',
             message: 'Pick blog theme',
-            choices: getThemeList(themes)
+            choices: getThemeList(installedTheme)
           },
           {
             type: 'select',
@@ -247,13 +248,13 @@ title: ${item.title}
               }
             },
             filePath: getPath(`./.vitepress/theme/index.${lang.replace('m', '')}`),
-            content: `import { ${theme} } from 'vitepress-blog/theme'
+            content: `import { ${theme.name} as theme } from '@vitepress-blog-theme/${theme.name}'
 
-export default ${theme}
+export default theme
 `
           }
         ])
-        const { themePagesFileTasks, nav } = getTheme(theme, themes)
+        const { themePagesFileTasks, nav } = getThemeConfigTask(theme)
         taskList.push.apply(taskList, themePagesFileTasks)
         taskList.push({
           async before() {
@@ -266,7 +267,7 @@ export default ${theme}
           content: `import { defineConfig } from 'vitepress-blog'
 
 export default defineConfig({
-  srcDir: '${_rootPath}',
+  srcDir: '${_rootPath}/site',
   title: '${title}',
   themeConfig: {
     name: '${name}',

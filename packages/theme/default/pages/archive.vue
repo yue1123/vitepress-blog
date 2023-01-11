@@ -27,59 +27,23 @@
 
 <script setup lang="ts">
   import { BIconPencilSquare } from 'bootstrap-icons-vue'
-  import { computed } from 'vue'
   import { withBase } from 'vitepress'
   import PostMeta from '../components/PostMeta.vue'
-  import { postList } from '@vitepress-blog/theme-helper'
+  import { useArchivesList } from '@vitepress-blog/theme-helper'
 
-  type NodeType = 'year' | 'month' | 'post'
-  interface ArchivesList {
-    type: NodeType
-    title: string
-    snippets?: string
-    coverImg?: string
-    createTime: number
-    url: string
-    top?: boolean
-    tags?: string[]
-  }
-
-  const data = Object.create(null)
-  const archivesList = computed<ArchivesList[]>(() => {
-    for (const post of postList) {
-      const { createTime } = post
-      const _createTime = new Date(createTime)
-      const year = _createTime.getUTCFullYear()
-      const month = _createTime.getMonth() + 1
-      let addYearItemFlag = false
-      if (!data[year]) {
-        data[year] = {}
-        addYearItemFlag = true
+  const archivesList = useArchivesList({
+    onYearAppend(year) {
+      return {
+        type: 'year',
+        title: `${year}年`
       }
-      if (!data[year][month]) {
-        data[year][month] = []
-        let _monthList = data[year][month]
-        if (addYearItemFlag) {
-          _monthList.push({
-            type: 'year',
-            title: `${year}年`
-          })
-        }
-        _monthList.push({
-          type: 'month',
-          title: `${month}月`
-        })
-      }
-      post.type = 'post'
-      data[year][month].push(post)
-    }
-    let archivesList: any = []
-    for (const yearItem of Object.values(data)) {
-      for (const monthItem of Object.values(yearItem as Record<string, any>)) {
-        archivesList.push.apply(archivesList, monthItem)
+    },
+    onMonthAppend(month) {
+      return {
+        type: 'month',
+        title: `${month}月`
       }
     }
-    return archivesList
   })
 </script>
 

@@ -1,3 +1,4 @@
+import { resolve } from 'path'
 import { type UserConfig, type DefaultTheme } from 'vitepress'
 import blogHelper from './plugins/blog-helper'
 import { expandMarkdownIt } from './plugins/expand-markdown-it'
@@ -18,26 +19,60 @@ export interface ThemeConfig extends DefaultTheme.Config {
    * 首页文章排序方式
    * @enum[] CREATE_TIME 创建时间
    * @enum[] RANDOM 随机
+   * @enum[] UPDATE_TIME 更新时间
+   * @default CREATE_TIME
    */
-  sortBy?: 'CREATE_TIME' | 'RANDOM'
+  sortBy?: 'CREATE_TIME' | 'RANDOM' | 'UPDATE_TIME'
   /**
    * 文章标题名字
-   * @enum[] fileNameFirst 文件名字优先
-   * @enum[] contentTitleFirst 文章内容标题优先
+   * @enum[] fileName 文件名字优先
+   * @enum[] contentTitle 文章内容标题优先
+   * @default fileName
    */
-  titleString?: 'fileNameFirst' | 'contentTitleFirst'
+  titleOrder?: 'fileName' | 'contentTitle'
+  pagination?: {
+    /**
+     * 上一页文字
+     */
+    prevText?: string
+    /**
+     * 下一页文字
+     */
+    nextText?: string
+    /**
+     * 每页显示条目个数
+     */
+    size?: number
+    /**
+     * 页码按钮的数量，可根据该属性折叠分页按钮
+     */
+    pagerCount?: number
+    /**
+     * 只有一页时是否隐藏
+     */
+    hideOnSinglePage?: boolean
+  }
 }
 export type UserThemeConfig = UserConfig<ThemeConfig>
 
 const getSharedConfig = (userConfig: any) => {
   return {
-    srcDir: './site',
+    cacheDir: resolve(process.cwd(), './node_modules/.vitepress'),
     markdown: {
       config: (md: any) => expandMarkdownIt(md)
     },
     vite: { plugins: [blogHelper(userConfig)] },
     themeConfig: {
-      outline: [1, 5]
+      outline: [1, 5],
+      sortby: 'CREATE_TIME',
+      titleOrder: 'fileName',
+      pagination: {
+        prevText: '上一页',
+        nextText: '下一页',
+        size: 10,
+        pagerCount: 7,
+        hideOnSinglePage: true
+      }
     },
     head: [
       [
@@ -52,7 +87,8 @@ const getSharedConfig = (userConfig: any) => {
 }
 
 function defineConfig(config: UserThemeConfig): UserThemeConfig {
-  return deepmerge(config, getSharedConfig(config))
+  console.log(config)
+  return deepmerge(getSharedConfig(config), config)
 }
 
 export { defineConfig }

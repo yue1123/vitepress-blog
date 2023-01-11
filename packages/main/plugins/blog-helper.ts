@@ -15,6 +15,10 @@ export default function blogHelper(userConfig: UserThemeConfig): Plugin {
     configResolved(resolvedConfig) {
       config = resolvedConfig
     },
+    handleHotUpdate({ file }) {
+      if (createTimeCache[file]) createTimeCache[file] = null
+      if (updateTimeCache[file]) updateTimeCache[file] = null
+    },
     async transform(code, id) {
       if (!id.endsWith('.md') || !/\/posts\//.test(id)) return
       let tags: string[] = []
@@ -26,11 +30,8 @@ export default function blogHelper(userConfig: UserThemeConfig): Plugin {
         if (config.command !== 'build') {
           const stat = fs.statSync(id)
           if (!!stat) {
-            createTime = createTimeCache[id] = stat.birthtimeMs + ''
+            createTime = createTimeCache[id] = Math.floor(stat.birthtimeMs) + ''
           }
-          console.log(createTimeCache)
-          console.log('c', createTime)
-          console.log('g', await getFileCreateTime(id))
         } else {
           createTime = createTimeCache[id] = (await getFileCreateTime(id)) + ''
         }
@@ -44,13 +45,24 @@ export default function blogHelper(userConfig: UserThemeConfig): Plugin {
         if (config.command !== 'build') {
           const stat = fs.statSync(id)
           if (!!stat) {
-            updateTime = updateTimeCache[id] = stat.mtimeMs + ''
+            updateTime = updateTimeCache[id] = Math.floor(stat.mtimeMs) + ''
           }
         } else {
           updateTime = updateTimeCache[id] = (await getFileUpdateTime(id)) + ''
         }
       }
-
+      // title
+      let title = path.basename(id, '.md')
+      // match first title reg
+      let titleReg = /\x20*\# (.+)/
+      if (themeConfig.titleOrder && themeConfig.titleOrder === 'contentTitle') {
+        const res = code.match(titleReg)
+        if (res && res[1]) {
+          title = res[1]
+        }
+        // remove origin code title string
+        code = code.replace(titleReg, '')
+      }
       // get tags
       if (themeConfig.filePathToTags) {
         tags = themeConfig.filePathToTags.reduce<string[]>((tags, { test: reg, tag }) => {
@@ -64,7 +76,7 @@ export default function blogHelper(userConfig: UserThemeConfig): Plugin {
       return appendFrontmatter(code, {
         createTime,
         updateTime,
-        title: path.basename(id, '.md'),
+        title,
         tags: tags,
         snippets: getSnippets(code, themeConfig.snippetsLength || 50),
         isPost: true

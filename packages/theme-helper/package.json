@@ -1,7 +1,21 @@
 {
   "name": "@vitepress-blog/theme-helper",
-  "version": "1.0.0",
+  "version": "1.0.0-alpha.1",
+  "main": "./index.ts",
+  "module": "./index.ts",
+  "peerDependencies": {
+    "vitepress": "^1.0.0-alpha.33"
+  },
   "dependencies": {
     "vue": "^3.2.45"
+  },
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "publishConfig": {
+    "main": "./dist/index.js",
+    "module": "./dist/index.js",
+    "typings": "./dist/index.d.ts"
   }
 }

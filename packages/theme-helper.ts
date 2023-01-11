@@ -1,1 +1,1 @@
-export * from '@vitepress-blog/theme-helper'
+export * from './theme-helper/index'

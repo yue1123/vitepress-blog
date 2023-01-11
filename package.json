@@ -1,6 +1,6 @@
 {
   "name": "vitepress-blog",
-  "version": "1.0.0",
+  "version": "1.1.0-alpha.1",
   "description": "expand vitepress for ssg blog",
   "packageManager": "pnpm@7.9.2",
   "type": "module",
@@ -12,14 +12,14 @@
       "require": "./dist/main/index.js",
       "import": "./dist/main/index.js"
     },
-    "./theme": {
-      "default": "./dist/theme/index.js"
-    },
     "./theme-helper": {
       "default": "./dist/theme-helper/index.js"
     },
     "./package.json": "./package.json"
   },
+  "author": "yue1123",
+  "homepage": "https://github.com/yue1123/vitepress-blog",
+  "license": "MIT",
   "files": [
     "bin",
     "dist",
@@ -30,15 +30,14 @@
     "theme.d.ts",
     "theme-helper.d.ts"
   ],
-  "publishConfig": {},
   "bin": "./bin/init.js",
   "workspaces": [
     "demos/*",
     "packages/*"
   ],
   "scripts": {
-    "dev": "rollup -c --bundleConfigAsCjs -w",
-    "build": "rimraf dist && tsc -p ./tsconfig.build.json && rollup -c --bundleConfigAsCjs",
+    "dev": "tsc -p tsconfig.build.json && rollup -c --bundleConfigAsCjs -w",
+    "build": "rimraf dist ./packages/theme-helper/dist && tsc -p ./tsconfig.build.json && rollup -c --bundleConfigAsCjs --environment NODE_ENV:production",
     "link_pnpm": "pnpm link --global",
     "build_theme_demo": "pnpm run build && pnpm run -C demos/default blog:build"
   },
@@ -50,6 +49,7 @@
     "@rollup/plugin-json": "^6.0.0",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@types/node": "^18.11.9",
+    "@types/prompts": "^2.4.2",
     "esbuild": "^0.16.15",
     "rimraf": "^3.0.2",
     "rollup": "^3.9.0",
@@ -57,18 +57,15 @@
     "rollup-plugin-esbuild": "^5.0.0",
     "tslib": "^2.4.1",
     "typescript": "^4.9.4",
-    "vite": "^4.0.3",
-    "@vitepress-blog/theme": "workspace:*",
-    "@vitepress-blog/theme-helper": "workspace:*",
-    "@vitepress-blog/main": "workspace:*",
-    "@vitepress-blog/cli": "workspace:*"
+    "vite": "^4.0.3"
   },
   "dependencies": {
-    "bootstrap-icons-vue": "^1.8.1",
+    "@vitepress-blog-theme/default": "workspace:*",
     "chalk": "^5.2.0",
     "commander": "^9.4.1",
     "cross-spawn": "^7.0.3",
     "deepmerge": "^4.2.2",
+    "fast-glob": "^3.2.12",
     "markdown-it-footnote": "^3.0.3",
     "markdown-it-image-lazy-loading": "^1.2.0",
     "markdown-it-imsize": "^2.0.1",
@@ -79,8 +76,14 @@
     "markdown-it-task-lists": "^2.1.1",
     "markdown-it-textual-uml": "^0.12.0",
     "prompts": "^2.4.2",
-    "sass": "^1.57.1",
     "vitepress": "1.0.0-alpha.33",
     "vue": "^3.2.45"
+  },
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": [
+        "@algolia/client-search"
+      ]
+    }
   }
 }

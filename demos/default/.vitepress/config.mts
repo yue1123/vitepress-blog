@@ -1,10 +1,9 @@
+import { resolve } from 'path'
 import { defineConfig } from 'vitepress-blog'
-import { resolve } from 'node:path'
 
 export default defineConfig({
-  srcDir: './',
+  srcDir: './site',
   outDir: resolve(process.cwd(), '../../build/defaultTheme'),
-  cacheDir: resolve(process.cwd(), './node_modules/.vitepress'),
   title: 'defaultTheme demo',
   base: '/vitepress-blog/defaultTheme/',
   themeConfig: {
@@ -21,7 +20,8 @@ export default defineConfig({
         tag: '随笔'
       }
     ],
-    sortBy: 'CREATE_TIME',
+    sortBy: 'UPDATE_TIME',
+    titleOrder: 'contentTitle',
     footer: {
       copyright: 'Copyright © 2023-present yue1123'
     }

@@ -5,11 +5,12 @@ const esbuild = require('rollup-plugin-esbuild').default
 const copy = require('rollup-plugin-copy')
 const { builtinModules } = require('module')
 const json = require('@rollup/plugin-json')
+const commonjs = require('@rollup/plugin-commonjs')
 
-const pkg = require('./package.json') 
+const pkg = require('./package.json')
 
 const { dependencies, version } = pkg
-const root = process.cwd() 
+const root = process.cwd()
 
 const external = [
   'vite',
@@ -17,6 +18,7 @@ const external = [
   ...Object.keys(dependencies),
   ...builtinModules.flatMap((m) => (m.includes('punycode') ? [] : [m, `node:${m}`]))
 ]
+
 const nodePlugins = [
   nodeResolve({ preferBuiltins: true }),
   esbuild({
@@ -24,14 +26,11 @@ const nodePlugins = [
       __VERSION__: `"${version}"`
     }
   }),
+  commonjs(),
   json()
 ]
 
-const vitepressBlogExport = [
-  resolve(root, './packages/index.ts'),
-  resolve(root, './packages/theme.ts'),
-  resolve(root, './packages/theme-helper.ts')
-]
+const vitepressBlogExport = [resolve(root, './packages/index.ts'), resolve(root, './packages/theme-helper.ts')]
 const vitepressBlog = defineConfig({
   input: vitepressBlogExport,
   external(id) {
@@ -63,18 +62,22 @@ const vitepressBlog = defineConfig({
     ...nodePlugins
   ]
 })
+
 const main = defineConfig({
   input: './packages/main/index.ts',
   external,
-  output: {
-    dir: './dist/main/',
-    exports: 'named',
-    format: 'esm',
-    preserveModules: true,
-    banner: getBanner(pkg)
-  },
+  output: [
+    {
+      dir: './dist/main/',
+      exports: 'named',
+      format: 'esm',
+      preserveModules: true,
+      banner: getBanner(pkg)
+    }
+  ],
   plugins: nodePlugins
 })
+
 const command = defineConfig({
   input: './packages/cli/command.ts',
   external,
@@ -89,13 +92,24 @@ const command = defineConfig({
 const themeHelper = defineConfig({
   input: './packages/theme-helper/index.ts',
   external,
-  output: {
-    dir: './dist/theme-helper/',
-    exports: 'named',
-    format: 'esm',
-    preserveModules: true,
-    banner: getBanner(pkg)
-  },
+  output: [
+    {
+      dir: './dist/theme-helper/',
+      exports: 'named',
+      format: 'esm',
+      preserveModules: true,
+      banner: getBanner(pkg)
+    },
+    process.env.NODE_ENV === 'production'
+      ? {
+          dir: './packages/theme-helper/dist',
+          exports: 'named',
+          format: 'esm',
+          preserveModules: true,
+          banner: getBanner(pkg)
+        }
+      : null
+  ],
   plugins: [
     nodeResolve({ preferBuiltins: true }),
     esbuild(),
@@ -107,27 +121,6 @@ const themeHelper = defineConfig({
           dest: './',
           rename: 'theme-helper.d.ts',
           transform: (contents) => contents.toString().replace(/\.\//g, './dist/themeHelper/')
-        }, 
-        {
-          src: './dist/theme/index.d.ts',
-          dest: './',
-          rename: 'theme.d.ts',
-          transform: (contents) => contents.toString().replace(/\.\//g, './dist/theme/')
-        }
-      ]
-    }),
-    // copy theme
-    copy({
-      filter(src) {
-        if (/node_modules|package.json/.test(src)) {
-          return false
-        }
-        return true
-      },
-      targets: [
-        {
-          src: './packages/theme/*',
-          dest: 'dist/theme'
         }
       ]
     }),

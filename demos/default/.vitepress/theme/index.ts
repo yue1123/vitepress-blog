@@ -1,3 +1,3 @@
-import { defaultBlogTheme } from 'vitepress-blog/theme'
+import { default as theme } from '@vitepress-blog-theme/default'
 
-export default defaultBlogTheme
+export default theme

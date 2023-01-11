@@ -82,7 +82,7 @@ export function appendFrontmatter(code: string, data: Record<string, any>) {
 }
 
 export function getSnippets(code: string, length: number): string {
-  return filterHTMLTag(filterMarkdown(code)).match(snippetsReg)?.join('').slice(0, length) + '...'
+  return (filterHTMLTag(filterMarkdown(code)).match(snippetsReg)?.join('').slice(0, length) || '') + '...'
 }
 
 // filter markdown content

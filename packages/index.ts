@@ -1,1 +1,1 @@
-export * from '@vitepress-blog/main'
+export * from './main/index'

@@ -7,7 +7,7 @@ declare module 'markdown-it-task-lists'
 declare module 'markdown-it-katex'
 declare module 'markdown-it-image-lazy-loading'
 declare module 'markdown-it-textual-uml'
-declare module 'prompts'
+// declare module 'prompts'
 declare module 'cross-spawn'
 
 declare const __VERSION__: string

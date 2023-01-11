@@ -1,14 +1,14 @@
 ---
 tags:
-  - 演示
+  - 演示1
   - markdown
 ---
-
-# hello vitepress blog
+111233
+# hello vitepress blog11111123ff
 
 [参考](https://vitepress.vuejs.org/guide/markdown)
 
-## 扩展语法
+## 扩展语法1123123
 
 ### 指定封面图
 
@@ -18,7 +18,7 @@ coverImg: xxx
 ---
 ```
 
-### 置顶
+### 置顶1123fsad123ff123
 
 ```md
 ---
@@ -53,7 +53,17 @@ Friday the 13^th^
 
 多行公式块：
 
-$$ \frac{1}{ \Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{ \frac25 \pi}} = 1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} { 1+\frac{e^{-6\pi}} {1+\frac{e^{-8\pi}}{1+\cdots}} } }$$
+$$
+rac{1}{
+  Bigl(sqrt{phi sqrt{5}}-phiBigr) e^{
+  rac25 pi}} = 1+rac{e^{-2pi}} {1+rac{e^{-4pi}} {
+    1+rac{e^{-6pi}}
+    {1+rac{e^{-8pi}}{1+cdots}}
+  }
+}
+
+
+$$
 
 行内公式：
 
@@ -61,14 +71,12 @@ $$ \frac{1}{ \Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{ \frac25 \pi}} = 1+\frac{e
 
 ### UML
 
+
 ```dot
-@startmindmap
-* root node
-	* some first level node
-		* second level node
-		* another second level node
-	* another first level node
-@endmindmap
+digraph example1 {
+    1 -> 2132123 -> { 4, 5 };
+    1 -> 3 -> { 6, 7 };
+}
 ```
 
 
