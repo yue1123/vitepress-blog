@@ -1,2 +1,121 @@
 # ceshi123
+
 fhhff23422
+
+## nihao
+
+```mermaid
+journey
+  title My working day
+  section Go to work
+    Make tea: 5: Me
+    Go upstairs: 3: Me
+    Do work: 1: Me, Cat
+  section Go home
+    Go downstairs: 5: Me
+    Sit down: 5: Me
+```
+
+```mermaid
+sequenceDiagram
+    Alice ->> Bob: Hello Bob, how are you?
+    Bob-->>John: How about you John?
+    Bob--x Alice: I am good thanks!
+    Bob-x John: I am good thanks!
+    Note right of John: Bob thinks a long<br/>long time, so long<br/>that the text does<br/>not fit on a row.
+
+    Bob-->Alice: Checking with John...
+    Alice->John: Yes... John, how are you?
+
+```
+
+```mermaid
+journey
+    title My working day
+    section Go to work
+      Make tea: 5: Me
+      Go upstairs: 3: Me
+      Do work: 1: Me, Cat
+    section Go home
+      Go downstairs: 5: Me
+      Sit down: 3: Me
+```
+
+```mermaid
+gitGraph:
+    commit "Ashish"
+    branch newbranch
+    checkout newbranch
+    commit id:"1111"
+    commit tag:"test"
+    checkout main
+    commit type: HIGHLIGHT
+    commit
+    merge newbranch
+    commit
+    branch b2
+    commit
+```
+
+```mermaid
+pie title What Voldemort doesn't have?
+  "FRIENDS" : 2
+  "FAMILY" : 3
+  "NOSE" : 45
+```
+
+```mermaid {scale: 2}
+gantt
+    section Section
+    Completed :done,    des1, 2014-01-06,2014-01-08
+    Active        :active,  des2, 2014-01-07, 3d
+    Parallel 1   :         des3, after des1, 1d
+    Parallel 2   :         des4, after des1, 1d
+    Parallel 3   :         des5, after des3, 1d
+    Parallel 4   :         des6, after des4, 1d
+```
+
+```plantuml
+
+@startuml PERT
+left to right direction
+' Horizontal lines: -->, <--, <-->
+' Vertical lines: ->, <-, <->
+title PERT: Project Name
+
+map Kick.Off {
+}
+map task.1 {
+    Start => End
+}
+map task.2 {
+    Start => End
+}
+map task.3 {
+    Start => End
+}
+map task.4 {
+    Start => End
+}
+map task.5 {
+    Start => End
+}
+Kick.Off --> task.1 : Label 1
+Kick.Off --> task.2 : Label 2
+Kick.Off --> task.3 : Label 3
+task.1 --> task.4
+task.2 --> task.4
+task.3 --> task.4
+task.4 --> task.5 : Label 4
+@enduml
+```
+
+```plantuml {scale: 0.5}
+@startuml
+!theme plain
+Bob -> Alice :  hello
+Bob <- Alice :  $success("success: hello B.")
+Bob -x Alice :  $failure("failure")
+Bob ->> Alice : $warning("warning")
+@enduml
+```

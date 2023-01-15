@@ -8,7 +8,3 @@
   position: relative;
   z-index: 2;
 }
-
-.VPContent .content * {
-  pointer-events: auto;
-}

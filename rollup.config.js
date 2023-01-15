@@ -15,6 +15,10 @@ const root = process.cwd()
 const external = [
   'vite',
   'vitepress/theme',
+  /\.vue$/,
+  (id) => {
+    return id.endsWith('.vue')
+  },
   ...Object.keys(dependencies),
   ...builtinModules.flatMap((m) => (m.includes('punycode') ? [] : [m, `node:${m}`]))
 ]
@@ -78,16 +82,16 @@ const main = defineConfig({
   plugins: nodePlugins
 })
 
-const command = defineConfig({
-  input: './packages/cli/command.ts',
-  external,
-  output: {
-    dir: './dist/cli/',
-    format: 'esm',
-    banner: getBanner(pkg)
-  },
-  plugins: nodePlugins
-})
+// const command = defineConfig({
+//   input: './packages/cli/command.ts',
+//   external,
+//   output: {
+//     dir: './dist/cli/',
+//     format: 'esm',
+//     banner: getBanner(pkg)
+//   },
+//   plugins: nodePlugins
+// })
 
 const themeHelper = defineConfig({
   input: './packages/theme-helper/index.ts',
@@ -137,4 +141,6 @@ function getBanner(pkg) {
  * Released under the ${pkg.license} License.
  */`.trim()
 }
-module.exports = [main, themeHelper, command, vitepressBlog]
+module.exports = [main, themeHelper, 
+  // command,
+   vitepressBlog]

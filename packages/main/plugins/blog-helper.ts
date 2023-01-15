@@ -1,55 +1,64 @@
 import path from 'path'
 import fs from 'fs'
 import type { Plugin } from 'vite'
-import { type UserThemeConfig } from '../index'
-import { getFileUpdateTime, getFileCreateTime, appendFrontmatter, getSnippets } from '../utils/index'
+import * as base64 from 'js-base64'
+import { encode } from 'plantuml-encoder'
 
-export default function blogHelper(userConfig: UserThemeConfig): Plugin {
-  const { themeConfig = {} } = userConfig
+import { type UserThemeConfig } from '@vitepress-blog/types'
+import { getFileUpdateTime, getFileCreateTime, appendFrontmatter, getSnippets, escapeVueInCode } from '../utils/index'
+
+export default function blogHelper(userConfigResolver: () => UserThemeConfig): Plugin {
+  let userConfig: UserThemeConfig
   let config: any
-  const createTimeCache = Object.create(null)
-  const updateTimeCache = Object.create(null)
+  const createTimeCache = new Map<string, string>()
+  const updateTimeCache = new Map<string, string>()
   return {
     name: 'blog-helper',
     enforce: 'pre',
     configResolved(resolvedConfig) {
       config = resolvedConfig
+      userConfig = userConfigResolver()
     },
     handleHotUpdate({ file }) {
-      if (createTimeCache[file]) createTimeCache[file] = null
-      if (updateTimeCache[file]) updateTimeCache[file] = null
+      if (createTimeCache.get(file)) createTimeCache.delete(file)
+      if (updateTimeCache.get(file)) updateTimeCache.delete(file)
     },
     async transform(code, id) {
-      if (!id.endsWith('.md') || !/\/posts\//.test(id)) return
+      // For all markdown
+      code = transformMermaid(code)
+      // @ts-ignore
+      code = transformPlantUml(code, userConfig.markdown.chart.plantuml.server)
+      // code = escapeVueInCode(code)
+      // Only for all post markdown
+      if (!id.endsWith('.md') || !/\/posts\//.test(id)) return code
+      const { themeConfig = {} } = userConfig
       let tags: string[] = []
       // get createTime
-      let createTime: string | null = createTimeCache[id] || null
-      if (!createTimeCache[id]) {
+      let createTime: string | void = createTimeCache.get(id)
+      if (!createTime) {
         // get file create time by git commit when build command run
         // otherwise file create time will refresh when per build on github ci environment
         if (config.command !== 'build') {
           const stat = fs.statSync(id)
-          if (!!stat) {
-            createTime = createTimeCache[id] = Math.floor(stat.birthtimeMs) + ''
-          }
+          !!stat && (createTime = Math.floor(stat.birthtimeMs) + '')
         } else {
-          createTime = createTimeCache[id] = (await getFileCreateTime(id)) + ''
+          createTime = (await getFileCreateTime(id)) + ''
         }
+        createTimeCache.set(id, createTime!)
       }
 
       // get createTime
-      let updateTime: string | null = createTimeCache[id] || null
-      if (!updateTimeCache[id]) {
+      let updateTime: string | void = createTimeCache.get(id)
+      if (!updateTime) {
         // get file create time by git commit when build command run
         // otherwise file create time will refresh when per build on github ci environment
         if (config.command !== 'build') {
           const stat = fs.statSync(id)
-          if (!!stat) {
-            updateTime = updateTimeCache[id] = Math.floor(stat.mtimeMs) + ''
-          }
+          !!stat && (updateTime = Math.floor(stat.mtimeMs) + '')
         } else {
-          updateTime = updateTimeCache[id] = (await getFileUpdateTime(id)) + ''
+          updateTime = (await getFileUpdateTime(id)) + ''
         }
+        updateTimeCache.set(id, updateTime!)
       }
       // title
       let title = path.basename(id, '.md')
@@ -72,15 +81,31 @@ export default function blogHelper(userConfig: UserThemeConfig): Plugin {
           return tags
         }, [])
       }
-
       return appendFrontmatter(code, {
         createTime,
         updateTime,
         title,
-        tags: tags,
-        snippets: getSnippets(code, themeConfig.snippetsLength || 50),
+        tags,
+        snippets: getSnippets(code, themeConfig.snippetsLength!),
         isPost: true
       })
     }
   }
+}
+
+export function transformMermaid(md: string): string {
+  return md.replace(/^```mermaid\s*?({.*?})?\n([\s\S]+?)\n```/gm, (_, options = '', code = '') => {
+    code = code.trim()
+    options = options.trim() || '{}'
+    const encoded = base64.encode(code, true)
+    return `<Mermaid :code="'${encoded}'" v-bind="${options}" />`
+  })
+}
+
+export function transformPlantUml(md: string, server: string): string {
+  return md.replace(/^```plantuml\s*?({.*?})?\n([\s\S]+?)\n```/gm, (_, options = '', content = '') => {
+    const code = encode(content.trim())
+    options = options.trim() || '{}'
+    return `<PlantUML :code="'${code}'" :server="'${server}'" v-bind="${options}" />`
+  })
 }

@@ -1,4 +1,4 @@
----
+<!-- ---
 tags:
   - 演示1
   - markdown
@@ -8,13 +8,13 @@ tags:
 
 [参考](https://vitepress.vuejs.org/guide/markdown)
 
-## 扩展语法1123123
-
+## 扩展语法1123123 -->
+<!-- 
 ### 指定封面图
 
 ```md
 ---
-coverImg: xxx
+coverImg: xxx 
 ---
 ```
 
@@ -107,4 +107,4 @@ digraph example1 {
     可以使用代码块。
     ```
 
-    还有其他行级排版语法，比如**加粗**和[链接](https://b3log.org)。
+    还有其他行级排版语法，比如**加粗**和[链接](https://b3log.org)。 -->

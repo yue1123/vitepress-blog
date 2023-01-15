@@ -12,7 +12,7 @@ export interface TagMap {
 
 export function useTagMap() {
   const { allPostList } = usePostListWithPagination()
-  const tagMap: Record<string, TagMap> = shallowReactive(Object.create(null))
+  const tagMap = Object.create(null)
   for (const post of allPostList.value) {
     if (post.tags) {
       for (const tag of post.tags) {
@@ -29,5 +29,8 @@ export function useTagMap() {
       }
     }
   }
-  return shallowReadonly(tagMap)
+  return {
+    tagMap: shallowReadonly(shallowReactive(tagMap)),
+    tags: Object.keys(tagMap)
+  }
 }

@@ -30,7 +30,6 @@
     "theme.d.ts",
     "theme-helper.d.ts"
   ],
-  "bin": "./bin/init.js",
   "workspaces": [
     "demos/*",
     "packages/*"
@@ -56,16 +55,20 @@
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-esbuild": "^5.0.0",
     "tslib": "^2.4.1",
+    "tsup": "^6.5.0",
     "typescript": "^4.9.4",
     "vite": "^4.0.3"
   },
   "dependencies": {
-    "@vitepress-blog-theme/default": "workspace:*",
+    "@types/plantuml-encoder": "^1.4.0",
+    "@vitepress-blog/types": "workspace:*",
+    "@vitepress-blog/theme-default": "workspace:*",
     "chalk": "^5.2.0",
     "commander": "^9.4.1",
     "cross-spawn": "^7.0.3",
     "deepmerge": "^4.2.2",
     "fast-glob": "^3.2.12",
+    "js-base64": "^3.7.4",
     "markdown-it-footnote": "^3.0.3",
     "markdown-it-image-lazy-loading": "^1.2.0",
     "markdown-it-imsize": "^2.0.1",
@@ -74,7 +77,9 @@
     "markdown-it-sub": "^1.0.0",
     "markdown-it-sup": "^1.0.0",
     "markdown-it-task-lists": "^2.1.1",
-    "markdown-it-textual-uml": "^0.12.0",
+    "mermaid": "^9.3.0",
+    "nanoid": "^4.0.0",
+    "plantuml-encoder": "^1.4.0",
     "prompts": "^2.4.2",
     "vitepress": "1.0.0-alpha.33",
     "vue": "^3.2.45"

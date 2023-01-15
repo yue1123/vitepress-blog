@@ -13,6 +13,9 @@
     "dist",
     "package.json"
   ],
+  "scripts": {
+    "build": "rimraf dist && tsup ./index.ts --format cjs,esm --dts --splitting --no-shims --external *.vue"
+  },
   "publishConfig": {
     "access": "public",
     "main": "./dist/index.js",

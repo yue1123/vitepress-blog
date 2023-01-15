@@ -1,6 +1,6 @@
 {
-  "name": "@vitepress-blog-theme/default",
-  "version": "1.0.0-alpha.1",
+  "name": "@vitepress-blog/theme-default",
+  "version": "0.0.1",
   "main": "./index.ts",
   "module": "./index.ts",
   "peerDependencies": {

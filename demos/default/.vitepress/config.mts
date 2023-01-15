@@ -1,11 +1,14 @@
 import { resolve } from 'path'
 import { defineConfig } from 'vitepress-blog'
 
-export default defineConfig({
+const a = defineConfig({
   srcDir: './site',
   outDir: resolve(process.cwd(), '../../build/defaultTheme'),
   title: 'defaultTheme demo',
   base: '/vitepress-blog/defaultTheme/',
+  markdown: {
+    theme: 'github-dark'
+  },
   themeConfig: {
     name: 'yue1123',
     nav: [
@@ -27,3 +30,6 @@ export default defineConfig({
     }
   }
 })
+
+console.log(a)
+export default a

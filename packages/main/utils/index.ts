@@ -1,5 +1,14 @@
 import { spawn } from 'cross-spawn'
-import { frontmatterReg, imgReg, linkReg, mdFrontmatter, snippetsReg } from '../constants/index'
+import {
+  frontmatterReg,
+  imgReg,
+  linkReg,
+  mdFrontmatter,
+  snippetsReg,
+  containerReg,
+  codeContainerReg
+} from '../constants/index'
+
 /**
  * get file update time by git commit log
  * @param {string} filePath relative path
@@ -87,7 +96,14 @@ export function getSnippets(code: string, length: number): string {
 
 // filter markdown content
 export function filterMarkdown(str: string): string {
-  return str.replace(frontmatterReg, '').replace(imgReg, '').replace(mdFrontmatter, '').replace(linkReg, '')
+  str = str
+    .replace(frontmatterReg, '')
+    .replace(imgReg, '')
+    .replace(mdFrontmatter, '')
+    .replace(linkReg, '')
+    .replace(containerReg, '')
+    .replace(codeContainerReg, '')
+  return str
 }
 // filter html tag
 export function filterHTMLTag(str: string): string {
@@ -95,5 +111,12 @@ export function filterHTMLTag(str: string): string {
   return str
     .replace(/<\/?[^>]*>/g, '')
     .replace(/[|]*\n/, '')
-    .replace(/&npsp;/gi, '')
+    .replace(/&\w+;/gi, '')
+}
+
+/**
+ * Escape `{{}}` in code block to prevent Vue interpret it
+ */
+export function escapeVueInCode(md: string) {
+  return md.replace(/{{([\w\W]*?)}}/g, '&lbrace;&lbrace;$1&rbrace;&rbrace;')
 }
