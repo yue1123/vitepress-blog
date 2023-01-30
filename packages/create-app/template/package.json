@@ -1,0 +1,14 @@
+{
+	"name": "untitled",
+	"private": true,
+	"scripts": {
+		"blog:dev": "vitepress dev ./",
+		"blog:build": "vitepress build ./",
+		"blog:serve": "vitepress serve ./"
+	},
+	"dependencies": {
+    "vitepress": "1.0.0-alpha.40",
+		"@vitepress-blog/theme-default": "*",
+		"vitepress-blog": "*"
+	}
+}

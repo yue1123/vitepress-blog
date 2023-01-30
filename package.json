@@ -1,94 +1,96 @@
 {
-  "name": "vitepress-blog",
-  "version": "1.1.0-alpha.4",
-  "description": "expand vitepress for ssg blog",
-  "packageManager": "pnpm@7.9.2",
-  "type": "module",
-  "main": "./dist/main/index.js",
-  "types": "./dist/main/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/main/index.d.ts",
-      "require": "./dist/main/index.js",
-      "import": "./dist/main/index.js"
-    },
-    "./theme-helper": {
-      "default": "./dist/theme-helper/index.js"
-    },
-    "./package.json": "./package.json"
-  },
-  "author": "yue1123",
-  "homepage": "https://github.com/yue1123/vitepress-blog",
-  "license": "MIT",
-  "files": [
-    "bin",
-    "dist",
-    "package.json",
-    "env.d.ts",
-    "README.md",
-    "README.es.md",
-    "theme.d.ts",
-    "theme-helper.d.ts"
-  ],
-  "workspaces": [
-    "demos/*",
-    "packages/*"
-  ],
-  "scripts": {
-    "dev": "tsc -p tsconfig.build.json && rollup -c --bundleConfigAsCjs -w",
-    "build": "rimraf dist ./packages/theme-helper/dist && tsc -p ./tsconfig.build.json && rollup -c --bundleConfigAsCjs --environment NODE_ENV:production",
-    "link_pnpm": "pnpm link --global",
-    "build_theme_demo": "pnpm run build && pnpm run -C demos/default blog:build"
-  },
-  "peerDependencies": {
-    "vitepress": "^1.0.0-alpha.33"
-  },
-  "devDependencies": {
-    "@rollup/plugin-commonjs": "^24.0.0",
-    "@rollup/plugin-json": "^6.0.0",
-    "@rollup/plugin-node-resolve": "^15.0.1",
-    "@types/node": "^18.11.9",
-    "@types/prompts": "^2.4.2",
-    "esbuild": "^0.16.15",
-    "rimraf": "^3.0.2",
-    "rollup": "^3.9.0",
-    "rollup-plugin-copy": "^3.4.0",
-    "rollup-plugin-esbuild": "^5.0.0",
-    "tslib": "^2.4.1",
-    "tsup": "^6.5.0",
-    "typescript": "^4.9.4",
-    "vite": "^4.0.3"
-  },
-  "dependencies": {
-    "@types/plantuml-encoder": "^1.4.0",
-    "@vitepress-blog/types": "workspace:*",
-    "@vitepress-blog/theme-default": "workspace:*",
-    "chalk": "^5.2.0",
-    "commander": "^9.4.1",
-    "cross-spawn": "^7.0.3",
-    "deepmerge": "^4.2.2",
-    "fast-glob": "^3.2.12",
-    "js-base64": "^3.7.4",
-    "markdown-it-footnote": "^3.0.3",
-    "markdown-it-image-lazy-loading": "^1.2.0",
-    "markdown-it-imsize": "^2.0.1",
-    "markdown-it-katex": "^2.0.3",
-    "markdown-it-mathjax": "^2.0.0",
-    "markdown-it-sub": "^1.0.0",
-    "markdown-it-sup": "^1.0.0",
-    "markdown-it-task-lists": "^2.1.1",
-    "mermaid": "^9.3.0",
-    "nanoid": "^4.0.0",
-    "plantuml-encoder": "^1.4.0",
-    "prompts": "^2.4.2",
-    "vitepress": "1.0.0-alpha.33",
-    "vue": "^3.2.45"
-  },
-  "pnpm": {
-    "peerDependencyRules": {
-      "ignoreMissing": [
-        "@algolia/client-search"
-      ]
-    }
-  }
+	"name": "vitepress-blog",
+	"version": "1.1.0-alpha.4",
+	"description": "expand vitepress for ssg blog",
+	"packageManager": "pnpm@7.0.0",
+	"type": "module",
+	"main": "./dist/main/index.js",
+	"types": "./dist/main/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/main/index.d.ts",
+			"require": "./dist/main/index.js",
+			"import": "./dist/main/index.js"
+		},
+		"./theme-helper": {
+			"default": "./dist/theme-helper/index.js"
+		},
+		"./package.json": "./package.json"
+	},
+	"author": "yue1123",
+	"homepage": "https://github.com/yue1123/vitepress-blog",
+	"license": "MIT",
+	"files": [
+		"bin",
+		"dist",
+		"package.json",
+		"env.d.ts",
+		"README.md",
+		"README.es.md",
+		"theme.d.ts",
+		"theme-helper.d.ts"
+	],
+	"workspaces": [
+		"demos/*",
+		"packages/*"
+	],
+	"scripts": {
+		"dev": "tsc -p tsconfig.build.json && rollup -c --bundleConfigAsCjs -w",
+		"build": "rimraf dist ./packages/theme-helper/dist && tsc -p ./tsconfig.build.json && rollup -c --bundleConfigAsCjs --environment NODE_ENV:production",
+		"link_pnpm": "pnpm link --global",
+		"build_theme_demo": "pnpm run build && pnpm run -C demos/default blog:build"
+	},
+	"peerDependencies": {
+		"vitepress": "^1.0.0-alpha.33"
+	},
+	"devDependencies": {
+		"@rollup/plugin-commonjs": "^24.0.0",
+		"@rollup/plugin-json": "^6.0.0",
+		"@rollup/plugin-node-resolve": "^15.0.1",
+		"@types/node": "^18.11.9",
+		"@types/prompts": "^2.4.2",
+		"esbuild": "^0.16.15",
+		"rimraf": "^3.0.2",
+		"rollup": "^3.9.0",
+		"rollup-plugin-copy": "^3.4.0",
+		"rollup-plugin-esbuild": "^5.0.0",
+		"tslib": "^2.4.1",
+		"tsup": "^6.5.0",
+		"typescript": "^4.9.4",
+		"vite": "3"
+	},
+	"dependencies": {
+		"@types/plantuml-encoder": "^1.4.0",
+		"@vitepress-blog/theme-default": "workspace:*",
+		"@vitepress-blog/types": "workspace:*",
+		"chalk": "^5.2.0",
+		"commander": "^9.4.1",
+		"cross-spawn": "^7.0.3",
+		"deepmerge": "^4.2.2",
+		"fast-glob": "^3.2.12",
+		"feed": "^4.2.2",
+		"gray-matter": "^4.0.3",
+		"js-base64": "^3.7.4",
+		"markdown-it-footnote": "^3.0.3",
+		"markdown-it-image-lazy-loading": "^1.2.0",
+		"markdown-it-imsize": "^2.0.1",
+		"markdown-it-katex": "^2.0.3",
+		"markdown-it-mathjax": "^2.0.0",
+		"markdown-it-sub": "^1.0.0",
+		"markdown-it-sup": "^1.0.0",
+		"markdown-it-task-lists": "^2.1.1",
+		"mermaid": "^9.3.0",
+		"nanoid": "^4.0.0",
+		"plantuml-encoder": "^1.4.0",
+		"prompts": "^2.4.2",
+		"vitepress": "1.0.0-alpha.40",
+		"vue": "^3.2.45"
+	},
+	"pnpm": {
+		"peerDependencyRules": {
+			"ignoreMissing": [
+				"@algolia/client-search"
+			]
+		}
+	}
 }
