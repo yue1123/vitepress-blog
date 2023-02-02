@@ -111,6 +111,16 @@ importers:
   packages/create-theme:
     specifiers: {}
 
+  packages/fa:
+    specifiers:
+      '@vitepress-blog-theme/default': latest
+      vitepress: 1.0.0-alpha.40
+      vitepress-blog: latest
+    dependencies:
+      '@vitepress-blog-theme/default': 1.0.0-alpha.1_vitepress@1.0.0-alpha.40
+      vitepress: 1.0.0-alpha.40
+      vitepress-blog: link:../..
+
   packages/theme-helper:
     specifiers:
       vitepress: ^1.0.0-alpha.33
@@ -678,7 +688,28 @@ packages:
       vite: ^4.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 4.0.4
+      vite: 4.0.4_@types+node@18.11.18
+      vue: 3.2.45
+    dev: false
+
+  /@vitepress-blog-theme/default/1.0.0-alpha.1_vitepress@1.0.0-alpha.40:
+    resolution: {integrity: sha512-bSgSaYdCzlpcjixtCHtG5zNyJIf40Y0rKssbtmv2FNVlZXd4mS156LSY9pZ1mMvrl1sktlCzGK8lRoO3+2altw==}
+    peerDependencies:
+      vitepress: ^1.0.0-alpha.33
+    dependencies:
+      '@vitepress-blog/theme-helper': 1.0.0-alpha.1_vitepress@1.0.0-alpha.40
+      bootstrap-icons-vue: 1.8.1
+      sass: 1.57.1
+      vitepress: 1.0.0-alpha.40
+      vue: 3.2.45
+    dev: false
+
+  /@vitepress-blog/theme-helper/1.0.0-alpha.1_vitepress@1.0.0-alpha.40:
+    resolution: {integrity: sha512-S8r9jJrEGlGvLn1UL6G9F3oYOYITr/Y3eFv25RSwL2ggeG8XFJ4sIp8cJ6lNH1ly/qkhtndMUcZGeMHgphQN+A==}
+    peerDependencies:
+      vitepress: ^1.0.0-alpha.33
+    dependencies:
+      vitepress: 1.0.0-alpha.40
       vue: 3.2.45
     dev: false
 
