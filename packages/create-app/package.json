@@ -3,9 +3,9 @@
   "description": "Create starter template for vitepress-blog",
   "authors": "yue1123",
   "version": "0.0.1-beta.1",
-  "main": "./dist/index.js",
+  "main": "dist/index.js",
   "bin": {
-    "create-vitepress-blog": "index.js"
+    "create-vitepress-blog": "dist/index.js"
   },
   "files": [
     "bin",
