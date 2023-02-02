@@ -81,14 +81,12 @@ async function generateFeed(userConfig: Config): Promise<Feed> {
 		image: favicon,
 		favicon
 	}
-  console.log(sharedState)
 	const posts: any[] = (
 		await Promise.all(
 			[...sharedState.values()].map(async ({ code, frontmatter, link }) => {
 				const res: any = matter(frontmatter)
 
 				const { createTime, title } = res.data
-				console.log(createTime)
 				const url: string = link.slice(link.search(/(\\|\/)posts(\\|\/).+\.md$/))
 				return {
 					...res.data,

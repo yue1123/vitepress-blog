@@ -1,0 +1,22 @@
+import { defineConfig } from 'vitepress-blog'
+
+export default defineConfig({
+  title: '{{title}}',
+  themeConfig: {
+    name: '{{name}}',
+    nav: [{{nav}}],
+    socialLinks: [
+      { icon: 'github', link: 'https://github.com/{{name}}' },
+    ],
+    filePathToTags: [
+      {
+        test: /\/notes\\/,
+        tag: '随笔'
+      }
+    ],
+    sortBy: 'CREATE_TIME',
+    footer: {
+      copyright: 'Copyright © 2023-present {{name}}'
+    }
+  }
+})

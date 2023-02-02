@@ -1,4 +1,4 @@
-import mermaid from 'mermaid/dist/mermaid'
+import mermaid from 'mermaid'
 import { customAlphabet } from 'nanoid'
 import { decode } from 'js-base64'
 

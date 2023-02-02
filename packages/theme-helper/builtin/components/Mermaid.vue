@@ -75,7 +75,7 @@
 
 <style scoped>
 	.mermaid {
-		background: var(--vp-c-bg-mute);
+		background: var(--vp-c-mute);
 		padding: 15px;
 		border-radius: 6px;
 		overflow-x: auto;

@@ -70,33 +70,18 @@ $$
 
 ### UML
 
-```mermaid
-journey
-    title My working day
-    section Go to work
-      Make tea: 5: Me
-      Go upstairs: 3: Me
-      Do work: 1: Me, Cat
-    section Go home
-      Go downstairs: 5: Me
-      Sit down: 3: Me
-```
-
-```
-@startuml
-!theme plain
-Bob -> Alice :  hello
-Bob <- Alice :  $success("success: hello B.")
-Bob -x Alice :  $failure("failure")
-Bob ->> Alice : $warning("warning")
-@enduml
+```dot
+digraph example1 {
+    1 -> 2132123 -> { 4, 5 };
+    1 -> 3 -> { 6, 7 };
+}
 ```
 
 ### 脚注
 
 这里是一个脚注引用[^1]，这里是另一个脚注引用[^bignote]。
 
-```text
+````text
 这里是一个脚注引用[^1]，这里是另一个脚注引用[^bignote]。
 [^1]: 第一个脚注定义。
 [^bignote]: 脚注定义可使用多段内容。
@@ -108,7 +93,7 @@ Bob ->> Alice : $warning("warning")
     ```
 
     还有其他行级排版语法，比如**加粗**和[链接](https://b3log.org)。
-```
+````
 
 [\^1]: 第一个脚注定义。
 [\^bignote]: 脚注定义可使用多段内容。

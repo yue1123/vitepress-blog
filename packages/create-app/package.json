@@ -1,23 +1,33 @@
 {
-	"name": "create-vitepress-blog",
-	"description": "Create starter template for vitepress-blog",
-	"authors": "yue1123",
-	"version": "1.0.0",
-	"main": "./dist/index.js",
-	"bin": {
-		"create-vitepress-blog": "index.js"
-	},
-	"scripts": {
-		"dev": "rollup -c --bundleConfigAsCjs -w",
-		"build": "rollup -c --bundleConfigAsCjs"
-	},
-	"engines": {
-		"node": ">=14.0.0"
-	},
-	"dependencies": {
-		"chalk": "4",
-		"commander": "^9.4.1",
-		"execa": "^6.1.0",
-		"prompts": "^2.4.2"
-	}
+  "name": "create-vitepress-blog",
+  "description": "Create starter template for vitepress-blog",
+  "authors": "yue1123",
+  "version": "0.0.1-beta.1",
+  "main": "./dist/index.js",
+  "bin": {
+    "create-vitepress-blog": "index.js"
+  },
+  "files": [
+    "bin",
+    "dist",
+    "template",
+    "package.json",
+    "README.md"
+  ],
+  "scripts": {
+    "dev": "rollup -c --bundleConfigAsCjs -w",
+    "build": "rollup -c --bundleConfigAsCjs"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "dependencies": {
+    "chalk": "4",
+    "commander": "^9.4.1",
+    "execa": "5.1.1",
+    "prompts": "^2.4.2"
+  },
+  "devDependencies": {
+    "@types/execa": "^2.0.0"
+  }
 }

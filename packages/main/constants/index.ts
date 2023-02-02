@@ -1,4 +1,4 @@
-export const frontmatterReg = /---[\w\W]*?---/gim
+export const frontmatterReg = /---[\w\W]*?---/im
 export const imgReg = /\!\[.+\]\(.+\)/g
 export const linkReg = /\[.+\]\(.+\)/g
 export const mdFrontmatter = /\{\{\s+\$frontmatter\s+\}\}/g

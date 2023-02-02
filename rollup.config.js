@@ -74,7 +74,7 @@ const main = defineConfig({
     {
       dir: './dist/main/',
       exports: 'named',
-      format: 'esm',
+      format: 'cjs',
       preserveModules: true,
       banner: getBanner(pkg)
     }

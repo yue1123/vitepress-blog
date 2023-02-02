@@ -5,3 +5,116 @@ tags:
 ---
 
 # test ahhh
+
+
+fhhff23422
+
+## nihao
+
+```mermaid
+journey
+  title My working day
+  section Go to work
+    Make tea: 5: Me
+    Go upstairs: 3: Me
+    Do work: 1: Me, Cat
+  section Go home
+    Go downstairs: 5: Me
+    Sit down: 5: Me
+```
+
+```mermaid
+sequenceDiagram
+    Alice ->> Bob: Hello Bob, how are you?
+    Bob-->>John: How about you John?
+    Bob--x Alice: I am good thanks!
+    Bob-x John: I am good thanks!
+    Note right of John: Bob thinks a long<br/>long time, so long<br/>that the text does<br/>not fit on a row.
+
+    Bob-->Alice: Checking with John...
+    Alice->John: Yes... John, how are you?
+
+```
+
+```mermaid
+journey
+    title My working day
+    section Go to work
+      Make tea: 5: Me
+      Go upstairs: 3: Me
+      Do work: 1: Me, Cat
+    section Go home
+      Go downstairs: 5: Me
+      Sit down: 3: Me
+```
+
+```mermaid
+gitGraph:
+    commit "Ashish"
+    branch newbranch
+    checkout newbranch
+    commit id:"1111"
+    commit tag:"test"
+    checkout main
+    commit type: HIGHLIGHT
+    commit
+    merge newbranch
+    commit
+    branch b2
+    commit
+```
+
+```mermaid
+pie title What Voldemort doesn't have?
+  "FRIENDS" : 2
+  "FAMILY" : 3
+  "NOSE" : 45
+```
+
+```mermaid {scale: 2}
+gantt
+    section Section
+    Completed :done,    des1, 2014-01-06,2014-01-08
+    Active        :active,  des2, 2014-01-07, 3d
+    Parallel 1   :         des3, after des1, 1d
+    Parallel 2   :         des4, after des1, 1d
+    Parallel 3   :         des5, after des3, 1d
+    Parallel 4   :         des6, after des4, 1d
+```
+
+
+
+```plantuml
+@startuml
+!theme plain
+Bob -> Alice :  hello
+Bob <- Alice :  $success("success: hello B.")
+Bob -x Alice :  $failure("failure")
+Bob ->> Alice : $warning("warning")
+@enduml
+```
+
+```plantuml
+@startuml
+scale 350 width
+[*] --> NotShooting
+
+state NotShooting {
+  [*] --> Idle
+  Idle --> Configuring : EvConfig
+  Configuring --> Idle : EvConfig
+}
+
+state Configuring {
+  [*] --> NewValueSelection
+  NewValueSelection --> NewValuePreview : EvNewValue
+  NewValuePreview --> NewValueSelection : EvNewValueRejected
+  NewValuePreview --> NewValueSelection : EvNewValueSaved
+
+  state NewValuePreview {
+     State1 -> State2
+  }
+
+}
+@enduml
+```

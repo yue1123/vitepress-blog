@@ -67,7 +67,7 @@
 
 <style scoped>
 	.plantUml-container {
-		background: var(--vp-c-bg-mute);
+		background: var(--vp-c-mute);
 		text-align: center;
 		padding: 15px;
 		border-radius: 6px;
