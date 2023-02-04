@@ -1,0 +1,20 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "../../dist/client",
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "nodenext",
+    "declaration": true,
+    "declarationDir": "../../dist/client-types",
+    "jsx": "preserve",
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "types": ["vite/client"],
+    "paths": {
+      "easyname": ["index.ts"],
+      "easyname/theme": ["../../theme.d.ts"]
+    }
+  },
+  "include": ["."]
+}

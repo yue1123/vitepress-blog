@@ -13,50 +13,47 @@ export default function generateRss(userConfigResolver: () => Config): Plugin {
 	let rssCache = new Map<string, string>()
 
 	return {
-		name: 'generate-rss',
-		enforce: 'post',
-		configResolved() {
-			userConfig = userConfigResolver()
-		},
-		// development rss.xml generate
-		configureServer(server) {
-			return () => {
-				server.middlewares.use(async (req, res, next) => {
-					const { url } = req
-					if (url === '/rss.xml' || url === '/rss.json' || url === '/rss.atom') {
-						const fnKeyMap: Record<string, 'rss2' | 'json1' | 'atom1'> = {
-							'/rss.xml': 'rss2',
-							'/rss.json': 'json1'
-							// '/rss.atom': 'atom1'
-						}
-						res.statusCode = 200
-						res.setHeader(
-							'Content-Type',
-							`application/${path.extname(url).replace('.', '')}`
-						)
-						let resData: string | void = rssCache.get(url)
-						if (!resData) {
-							const feed = await generateFeed(userConfig)
-							Object.entries(fnKeyMap).forEach(([_url, fnKey]) => {
-								const data = feed[fnKey]()
-								sharedState.size && rssCache.set(_url, data)
-								_url === url && (resData = data)
-							})
-						}
-						res.write(resData)
-						res.end()
-					} else {
-						next()
-					}
-				})
-			}
-		},
-		// production rss.xml generate
-		async buildEnd() {
-			const feed = await generateFeed(userConfig)
-			writeFeed(userConfig.outDir || path.resolve('./.vitepress/dist/'), feed)
-		}
-	}
+    name: 'generate-rss',
+    enforce: 'post',
+    configResolved() {
+      userConfig = userConfigResolver()
+    },
+    // development rss.xml generate
+    configureServer(server) {
+      return () => {
+        server.middlewares.use(async (req, res, next) => {
+          const { url } = req
+          if (url === '/rss.xml' || url === '/rss.json' || url === '/rss.atom') {
+            const fnKeyMap: Record<string, 'rss2' | 'json1' | 'atom1'> = {
+              '/rss.xml': 'rss2',
+              '/rss.json': 'json1'
+              // '/rss.atom': 'atom1'
+            }
+            res.statusCode = 200
+            res.setHeader('Content-Type', `application/${path.extname(url).replace('.', '')}`)
+            let resData: string | void = rssCache.get(url)
+            if (!resData) {
+              const feed = await generateFeed(userConfig)
+              Object.entries(fnKeyMap).forEach(([_url, fnKey]) => {
+                const data = feed[fnKey]()
+                sharedState.size && rssCache.set(_url, data)
+                _url === url && (resData = data)
+              })
+            }
+            res.write(resData)
+            res.end()
+          } else {
+            next()
+          }
+        })
+      }
+    },
+    // production rss.xml generate
+    async buildEnd() {
+      const feed = await generateFeed(userConfig)
+      writeFeed(userConfig.outDir || path.resolve('./.vitepress/dist/'), feed)
+    }
+  }
 }
 
 async function generateFeed(userConfig: Config): Promise<Feed> {

@@ -7,21 +7,22 @@ import type {
 import type { MermaidConfig } from 'mermaid'
 
 export interface MarkdownOptions extends _MarkdownOptions {
-	/**
-	 * Chart rendering configuration
-	 */
-	chart?: {
-		/**
-		 * Mermaid configuration
-		 * @see https://mermaid.js.org/
-		 */
-		mermaid: MermaidConfig
-		/**
-		 * plantUML configuration
-		 * @see https://plantuml.com/zh/
-		 */
-		plantuml: { server: string }
-	}
+  /**
+   * Chart rendering configuration
+   */
+  chart?: {
+    /**
+     * Mermaid configuration
+     * @see https://mermaid.js.org/
+     */
+    mermaid: MermaidConfig
+    /**
+     * plantUML configuration
+     * @default https://www.plantuml.com/plantuml
+     * @see https://plantuml.com/zh/
+     */
+    plantuml: { server: string }
+  }
 }
 
 export interface UserConfig<ThemeConfig> extends _UserConfig {

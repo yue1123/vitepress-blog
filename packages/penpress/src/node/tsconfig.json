@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "target": "es2020",
+    "baseUrl": ".",
+    "outDir": "../../dist/node",
+    "module": "esnext",
+    "types": ["node"],
+    "sourceMap": true
+  },
+  "include": ["."]
+}
