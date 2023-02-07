@@ -1,6 +1,6 @@
 <script setup lang="ts">
 	import { computed, getCurrentInstance, ref, watch, nextTick } from 'vue'
-	import { useData } from 'vitepress'
+	import { useData } from 'penpress'
 	import { renderMermaid } from '../modules/mermaid'
 	import ShadowRoot from './ShadowRoot.vue'
 	import Loading from './Loading.vue'

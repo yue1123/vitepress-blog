@@ -1,8 +1,0 @@
-{
-  "name": "@penpress/types",
-  "description": "Vitepress blog types",
-  "authors": "author",
-  "version": "0.0.1",
-  "main": "./index.ts",
-  "dependencies": {}
-}

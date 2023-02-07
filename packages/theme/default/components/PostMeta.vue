@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-  import { useFriendlyDate } from '@vitepress-blog/theme-helper'
+  import { useFriendlyDate } from '@penpress/theme-helper'
   import { BIconTags, BIconCalendar } from 'bootstrap-icons-vue'
   export interface PostMetaProps {
     tags?: string[]

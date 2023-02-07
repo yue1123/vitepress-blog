@@ -1,4 +1,4 @@
-import { defineTheme } from '@vitepress-blog/theme-helper'
+import { defineTheme } from '@penpress/theme-helper'
 import PostItem from './components/PostItem.vue'
 import PostBottom from './components/PostBottom.vue'
 import PostHeader from './components/PostHeader.vue'

@@ -1,12 +1,12 @@
 <template>
   <div class="post_item-container">
     <div class="post_item-content">
-      <h2>
-        <a :href="withBase(url)">
+      <a :href="withBase(url)">
+        <h2>
           {{ props.title }}
-          <Badge v-if="props.top" type="tip" text="置顶" />
-        </a>
-      </h2>
+        </h2>
+        <Badge v-if="props.top" type="tip" text="置顶" />
+      </a>
       <p>{{ props.snippets }}</p>
       <PostMeta :tags="props.tags" :createTime="props.createTime" />
     </div>
@@ -17,71 +17,80 @@
 </template>
 
 <script setup lang="ts">
-  import PostMeta from './PostMeta.vue'
-  import { withBase } from 'vitepress'
-  import { computed } from 'vue'
-  export interface Props {
-    title: string
-    snippets?: string
-    coverImg?: string
-    createTime: number
-    localePath: string
-    url: string
-    top?: boolean
-    tags?: string[]
-  }
+import PostMeta from './PostMeta.vue'
+import { withBase } from 'penpress'
+import { computed } from 'vue'
+export interface Props {
+  title: string
+  snippets?: string
+  coverImg?: string
+  createTime: number
+  localePath: string
+  url: string
+  top?: boolean
+  tags?: string[]
+}
 
-  const props = defineProps<Props>()
-  const coverImg = computed(() => {
-    const coverImg = props.coverImg
-    if (coverImg && !coverImg.startsWith(props.localePath)) {
-      return withBase(coverImg)
-    }
-    return coverImg
-  })
+const props = defineProps<Props>()
+const coverImg = computed(() => {
+  const coverImg = props.coverImg
+  if (coverImg && !coverImg.startsWith(props.localePath)) {
+    return withBase(coverImg)
+  }
+  return coverImg
+})
 </script>
 
 <style lang="scss" scoped>
-  .post_item {
-    &-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      border-top: 1px solid var(--vp-c-divider-light);
-      margin: 15px 0 16px;
-      &:first-child {
-        border: none;
-      }
-      h2 {
-        border: none;
-        margin-top: 15px;
-      }
-      h2 a {
-        color: var(--vp-c-text-1);
-      }
+.post_item {
+  &-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-top: 1px solid var(--vp-c-divider);
+    margin: 15px 0 16px;
+    &:first-child {
+      border: none;
     }
-    &-content p {
-      word-break: break-all;
-    }
-    &-meta {
-      display: flex;
+
+    a {
+      display: inline-flex;
       align-items: center;
-      justify-content: flex-start;
-      .create_time {
-        display: flex;
-        align-items: center;
-        font-size: 14px;
-        line-height: 14px;
+      color: var(--vp-c-text-1);
+      margin-top: 15px;
+      h2 {
+        margin: 0;
+        border: none;
       }
     }
-    &-image {
-      width: 120px;
-      margin: 15px 0 15px 25px;
-      border-radius: 3px;
-      overflow: hidden;
-      @media screen and (min-width: 768px) {
-        flex-shrink: 0;
-      }
+    :deep(.VPBadge) {
+      margin-top: 25px;
+      margin-left: 15px;
     }
   }
+
+  &-content p {
+    word-break: break-all;
+  }
+  &-meta {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    .create_time {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      line-height: 14px;
+    }
+  }
+  &-image {
+    width: 120px;
+    margin: 15px 0 15px 25px;
+    border-radius: 3px;
+    overflow: hidden;
+    @media screen and (min-width: 768px) {
+      flex-shrink: 0;
+    }
+  }
+}
 </style>

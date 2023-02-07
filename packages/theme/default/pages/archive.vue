@@ -27,9 +27,9 @@
 
 <script setup lang="ts">
   import { BIconPencilSquare } from 'bootstrap-icons-vue'
-  import { withBase } from 'vitepress'
+  import { withBase } from 'penpress'
   import PostMeta from '../components/PostMeta.vue'
-  import { useArchivesList } from '@vitepress-blog/theme-helper'
+  import { useArchivesList } from '@penpress/theme-helper'
 
   const archivesList = useArchivesList({
     onYearAppend(year) {

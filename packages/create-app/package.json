@@ -1,11 +1,11 @@
 {
-  "name": "create-vitepress-blog",
-  "description": "Create starter template for vitepress-blog",
+  "name": "create-penpress",
+  "description": "Create starter template for penpress",
   "authors": "yue1123",
   "version": "0.0.1-beta.3",
   "main": "dist/index.js",
   "bin": {
-    "create-vitepress-blog": "bin/index.js"
+    "create-penpress": "bin/create-app.js"
   },
   "files": [
     "bin",

@@ -3,3 +3,16 @@
 node_modules
 dist
 build
+*.log
+*.tgz
+.DS_Store
+.idea
+.temp
+.vite_opt_cache
+.vscode
+dist
+cache
+examples-temp
+node_modules
+pnpm-global
+TODOs.md

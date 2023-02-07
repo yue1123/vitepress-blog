@@ -1,9 +1,0 @@
-{
-  "name": "name",
-  "dependencies": {
-    "easyname": "workspace:*"
-  },
-  "scripts": {
-    "dev":"easyname dev ./"
-  }
-}

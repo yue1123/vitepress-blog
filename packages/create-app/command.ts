@@ -139,7 +139,7 @@ title: ${item.title}
               }
             },
             filePath: getPath(`./.vitepress/theme/index.${lang.replace('m', '')}`),
-            content: `import { ${theme.name} as theme } from '@vitepress-blog-theme/${theme.name}'
+            content: `import { ${theme.name} as theme } from '@penpress-theme/${theme.name}'
 
 export default theme
 `

@@ -2,8 +2,8 @@
 
 <script setup lang="ts">
   import { watch } from 'vue'
-  import { useData } from 'vitepress'
-  import { getScriptAsync } from '@vitepress-blog/theme-helper'
+  import { useData } from 'penpress'
+  import { getScriptAsync } from '@penpress/theme-helper'
   import { LIGHT_THEME_CONFIG, DARK_THEME_CONFIG } from './config'
   const { isDark } = useData()
   let canvasEl: HTMLCanvasElement | null = null

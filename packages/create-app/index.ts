@@ -5,7 +5,7 @@ import { resolve, join, relative, basename } from 'path'
 import { Command } from 'commander'
 import prompts from 'prompts'
 import { sync as execaSync } from 'execa'
-import { ThemeMetaConfig } from '@vitepress-blog/types'
+import { ThemeMetaConfig } from 'types'
 
 import {
   getOfficialThemeChoices,

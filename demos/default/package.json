@@ -1,12 +1,12 @@
 {
-	"dependencies": {
-		"vitepress": "1.0.0-alpha.40",
-		"vitepress-blog": "workspace:*"
-	},
-	"scripts": {
-		"blog:dev": "vitepress dev ./",
-		"blog:build": "vitepress build ./",
-		"blog:serve": "vitepress serve ./"
-	},
-	"packageManager": "pnpm@7.0.0"
+  "dependencies": {
+    "penpress": "workspace:*",
+    "@penpress/theme-default": "workspace:*"
+  },
+  "scripts": {
+    "blog:dev": "penpress dev ./",
+    "blog:build": "penpress build ./",
+    "blog:serve": "penpress serve ./"
+  },
+  "packageManager": "pnpm@7.0.0"
 }

@@ -17,8 +17,8 @@
 
 <script setup lang="ts">
   import BackgroundVue from '../components/Background/index.vue'
-  import defaultTheme from 'vitepress/theme'
-  import { useData } from 'vitepress'
+  import defaultTheme from 'penpress/theme'
+  import { useData } from 'penpress'
   import { computed } from 'vue'
   const { Layout } = defaultTheme
   const { frontmatter } = useData()

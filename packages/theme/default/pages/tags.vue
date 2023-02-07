@@ -40,8 +40,8 @@
 
 <script setup lang="ts">
   import { ref, computed, onBeforeMount } from 'vue'
-  import { withBase } from 'vitepress'
-  import { useTagMap } from '@vitepress-blog/theme-helper'
+  import { withBase } from 'penpress'
+  import { useTagMap } from '@penpress/theme-helper'
   import PostMeta from '../components/PostMeta.vue'
 
   const { tagMap, tags } = useTagMap()

@@ -1,11 +1,12 @@
 ---
 title: Vue3 BaiduMap GL
-tags: 
+tags:
   - nihao
+# coverImg: https://source.unsplash.com/1600x900/?nature,water
+top: true
 ---
 
 # test ahhh
-
 
 fhhff23422
 
@@ -81,8 +82,6 @@ gantt
     Parallel 3   :         des5, after des3, 1d
     Parallel 4   :         des6, after des4, 1d
 ```
-
-
 
 ```plantuml
 @startuml

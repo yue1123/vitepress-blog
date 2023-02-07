@@ -1,4 +1,4 @@
-import { useData, type VitePressData } from 'vitepress'
+import { useData, type PenPressData } from 'penpress'
 import { computed, ref, readonly, shallowRef, unref } from 'vue'
 
 export type SortType = 'CREATE_TIME' | 'RANDOM' | 'UPDATE_TIME'
@@ -29,7 +29,7 @@ export function usePostListWithPagination() {
   const sort = () => {
     // sort by user config and top
     postArr = postArr.sort(sortByHandleMap[sortBy]).sort(sortByHandleMap['TOP'])
-    allPostList.value = postArr.map<VitePressData>((item: any) => {
+    allPostList.value = postArr.map<PenPressData>((item: any) => {
       const { __pageData: pageData } = item
       return {
         url: '/' + pageData.relativePath.replace('.md', ''),

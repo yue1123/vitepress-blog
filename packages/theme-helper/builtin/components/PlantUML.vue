@@ -3,7 +3,7 @@
 	import { ref, nextTick, watchEffect } from 'vue'
 	import ShadowRoot from './ShadowRoot.vue'
 	import Loading from './Loading.vue'
-	import { useData } from 'vitepress'
+	import { useData } from 'penpress'
 	const { isDark } = useData()
 
 	const props = defineProps<{

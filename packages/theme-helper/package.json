@@ -1,12 +1,13 @@
 {
-  "name": "@vitepress-blog/theme-helper",
+  "name": "@penpress/theme-helper",
   "version": "1.0.0-alpha.1",
   "main": "./index.ts",
   "module": "./index.ts",
   "peerDependencies": {
-    "vitepress": "^1.0.0-alpha.33"
+    "penpress": "*"
   },
   "dependencies": {
+    "penpress": "workspace:*",
     "vue": "^3.2.45"
   },
   "files": [
