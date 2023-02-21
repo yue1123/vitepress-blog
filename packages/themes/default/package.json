@@ -1,0 +1,30 @@
+{
+  "name": "@upress/theme-default",
+  "version": "0.0.1",
+  "main": "./index",
+  "module": "./index",
+  "exports": {
+    ".": {
+      "types": "./index",
+      "import": "./index",
+      "require": "./index"
+    },
+    "./theme": {
+      "types": "./theme.d.ts",
+      "default": "./theme.d.ts"
+    }
+  },
+  "peerDependencies": {
+    "upress": "*"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@upress/theme-vitepress": "workspace:*",
+    "bootstrap-icons-vue": "^1.8.1",
+    "sass": "^1.57.1",
+    "upress": "workspace:*",
+    "vue": "^3.2.45"
+  }
+}

@@ -2,7 +2,7 @@
 
 node_modules
 dist
-build
+/build
 *.log
 *.tgz
 .DS_Store

@@ -1,0 +1,27 @@
+{
+  "name": "@upress/theme-vitepress",
+  "version": "0.0.1",
+  "main": "./index",
+  "module": "./index",
+  "exports": {
+    ".": {
+      "types": "./index",
+      "import": "./index",
+      "require": "./index"
+    },
+    "./theme": {
+      "types": "./theme.d.ts",
+      "default": "./theme.d.ts"
+    }
+  },
+  "peerDependencies": {
+    "upress": "*"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "upress": "workspace:*",
+    "vue": "^3.2.45"
+  }
+}

@@ -1,10 +1,13 @@
 ---
 title: Vue3 BaiduMap GL
 tags:
-  - nihao
+  - 1
+  - 2
 # coverImg: https://source.unsplash.com/1600x900/?nature,water
 top: true
 ---
+
+{{$frontmatter}}
 
 # test ahhh
 

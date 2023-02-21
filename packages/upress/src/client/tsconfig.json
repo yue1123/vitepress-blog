@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "../../dist",
+    "emitDeclarationOnly": false,
+    // "declarationDir": "../../dist/client-types",
+    "paths": {
+      "upress": ["index.ts"],
+      "upress/theme": ["../../theme.d.ts"]
+    }
+  },
+  "include": [".", "app/composables"]
+}

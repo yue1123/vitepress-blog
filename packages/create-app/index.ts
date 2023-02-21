@@ -5,7 +5,7 @@ import { resolve, join, relative, basename } from 'path'
 import { Command } from 'commander'
 import prompts from 'prompts'
 import { sync as execaSync } from 'execa'
-import { ThemeMetaConfig } from 'types'
+import type { ThemeMetaConfig } from '@upress/types'
 
 import {
   getOfficialThemeChoices,
@@ -24,7 +24,7 @@ const renameFiles: Record<string, string> = {
   _npmrc: '.npmrc'
 }
 
-const excludeFiles: string[] = ['.vitepress']
+const excludeFiles: string[] = ['.upress']
 let tempDir: string = ''
 const rmTempDir = () => {
   try {
@@ -64,7 +64,7 @@ async function main() {
   console.log(`${cyan('└┐┌││├┤├─├┬├┤└─└──')}-${yellow('├┴│ │ │ ┬')}`)
   console.log(`${cyan(' └┘┴┴└─┴ ┴└└─└─└─┘')} ${yellow('└─┴─└─└─┘')}`)
   console.log()
-  console.log(`${bold('  Vitepress blog') + dim(' Creator')}  ${blue(`v${version}`)}`)
+  console.log(`${bold('  UPress') + dim(' Creator')}  ${blue(`v${version}`)}`)
   console.log()
 
   const program = new Command()
@@ -80,7 +80,7 @@ async function main() {
           type: 'text',
           name: 'projectName',
           message: 'Project name:',
-          initial: 'vitepress-blog',
+          initial: 'upress-site',
           validate(value) {
             return packageNameRegExp.test(value)
               ? true
@@ -134,7 +134,7 @@ async function main() {
         {
           type: 'text',
           name: 'title',
-          message: "What's your blog title ?"
+          message: "What's your site title ?"
         },
         {
           type: 'text',
@@ -144,7 +144,7 @@ async function main() {
         {
           type: 'select',
           name: 'theme',
-          message: 'Pick blog theme',
+          message: 'Pick site theme',
           choices: [
             ...getOfficialThemeChoices(),
             {
@@ -157,6 +157,7 @@ async function main() {
           type: (prev) => (prev == 'community' ? 'text' : null),
           name: 'theme',
           message: 'Community theme package name',
+          // @ts-ignore
           async validate(value) {
             try {
               return await checkUserInputTheme(value)
@@ -212,26 +213,26 @@ async function main() {
       const { themePagesFileTasks, nav } = combineThemeMeta(themeMetaConfig, root)
       configWriteTasks.push({
         async before() {
-          const path = join(root, `./.vitepress/theme`)
+          const path = join(root, `./.upress/theme`)
           if (!existsSync(path)) {
             mkdirSync(path, { recursive: true })
           }
         },
-        filePath: `./.vitepress/theme/index.${lang}`,
-        content: replaceTemplate(readFileSync(join(templateDir, './.vitepress/theme/_index')).toString(), {
+        filePath: `./.upress/theme/index.${lang}`,
+        content: replaceTemplate(readFileSync(join(templateDir, './.upress/theme/_index')).toString(), {
           themeName: themeMetaConfig.name,
           theme
         })
       })
       configWriteTasks.push({
         async before() {
-          const path = join(root, `./.vitepress`)
+          const path = join(root, `./.upress`)
           if (!existsSync(path)) {
             mkdirSync(path)
           }
         },
-        filePath: `./.vitepress/config.${lang}`,
-        content: replaceTemplate(readFileSync(join(templateDir, './.vitepress/_config')).toString(), {
+        filePath: `./.upress/config.${lang}`,
+        content: replaceTemplate(readFileSync(join(templateDir, './.upress/_config')).toString(), {
           name,
           title,
           nav
@@ -241,13 +242,13 @@ async function main() {
     } else {
       configWriteTasks.push({
         async before() {
-          const path = join(root, `./.vitepress`)
+          const path = join(root, `./.upress`)
           if (!existsSync(path)) {
             mkdirSync(path)
           }
         },
-        filePath: `./.vitepress/config.${lang}`,
-        content: replaceTemplate(readFileSync(join(templateDir, './.vitepress/_config')).toString(), {
+        filePath: `./.upress/config.${lang}`,
+        content: replaceTemplate(readFileSync(join(templateDir, './.upress/_config')).toString(), {
           name,
           title,
           nav: ''
@@ -263,7 +264,7 @@ async function main() {
         console.log(dim('\n  Start it later by:\n'))
         if (root !== cwd) console.log(blue(`  cd ${bold(related)}`))
 
-        console.log(blue(`  ${pkgManager === 'npm' ? 'npm run blog:dev' : `${pkgManager} blog:dev`}`))
+        console.log(blue(`  ${pkgManager === 'npm' ? 'npm run dev' : `${pkgManager} dev`}`))
         console.log()
       })
       .catch((e) => {

@@ -5,7 +5,7 @@ import { createRequire } from 'module'
 const require = createRequire(import.meta.url)
 
 export default function themeResolver(root: string) {
-  const themeConfigs = fg.sync(['node_modules/@penpress-theme/**/config.json'], { deep: 2 })
+  const themeConfigs = fg.sync(['node_modules/@upress-theme/**/config.json'], { deep: 2 })
   if (!themeConfigs || (themeConfigs && !themeConfigs.length)) {
     return console.log(
       chalk.red(

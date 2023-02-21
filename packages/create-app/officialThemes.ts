@@ -1,7 +1,7 @@
 const officialThemes: Record<string, string> = {
   none: '',
-  // default: '@penpress/theme-default'
-  default: '@penpress-theme/default'
+  vitepress: '@upress/theme-vitepress',
+  default: '@upress/theme-default'
 }
 
 export default officialThemes

@@ -1,12 +1,13 @@
 {
   "dependencies": {
-    "penpress": "workspace:*",
-    "@penpress/theme-default": "workspace:*"
+    "upress": "workspace:*",
+    "@upress/theme-vitepress": "workspace:*",
+    "@upress/theme-default": "workspace:*"
   },
   "scripts": {
-    "blog:dev": "penpress dev ./",
-    "blog:build": "penpress build ./",
-    "blog:serve": "penpress serve ./"
+    "dev": "upress dev ./",
+    "build": "upress build ./",
+    "serve": "upress serve ./"
   },
   "packageManager": "pnpm@7.0.0"
 }

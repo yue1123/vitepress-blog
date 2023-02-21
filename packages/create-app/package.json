@@ -1,11 +1,11 @@
 {
-  "name": "create-penpress",
-  "description": "Create starter template for penpress",
+  "name": "create-upress",
+  "description": "Create starter template for upress",
   "authors": "yue1123",
   "version": "0.0.1-beta.3",
   "main": "dist/index.js",
   "bin": {
-    "create-penpress": "bin/create-app.js"
+    "create-upress": "bin/create-app.js"
   },
   "files": [
     "bin",
@@ -28,6 +28,7 @@
     "prompts": "^2.4.2"
   },
   "devDependencies": {
+    "@upress/types": "workspace:*",
     "@types/execa": "^2.0.0"
   }
 }
