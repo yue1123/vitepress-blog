@@ -1,7 +1,8 @@
-import { defineConfig } from 'vitepress-blog'
+import { defineConfig } from 'upress'
 
 export default defineConfig({
   title: '{{title}}',
+  theme: '{{theme}}',
   themeConfig: {
     name: '{{name}}',
     nav: [{{nav}}],

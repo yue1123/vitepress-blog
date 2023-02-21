@@ -60,9 +60,9 @@ title: ${item.title}
 
 async function main() {
   console.log()
-  console.log(`${cyan('┬  ┌┬┌─┌─┬─┌─┌─┌─┐')} ${yellow('┌┐┬ ┌─┌─┐')}`)
-  console.log(`${cyan('└┐┌││├┤├─├┬├┤└─└──')}-${yellow('├┴│ │ │ ┬')}`)
-  console.log(`${cyan(' └┘┴┴└─┴ ┴└└─└─└─┘')} ${yellow('└─┴─└─└─┘')}`)
+  console.log(`${cyan('╦ ╦')}${yellow('╔═╗┬─┐┌─┐┌─┐┌─┐')}`)
+  console.log(`${cyan('║ ║')}${yellow('╠═╝├┬┘├┤ └─┐└─┐')}`)
+  console.log(`${cyan('╚═╝')}${yellow('╩  ┴└─└─┘└─┘└─┘')}`)
   console.log()
   console.log(`${bold('  UPress') + dim(' Creator')}  ${blue(`v${version}`)}`)
   console.log()
@@ -213,19 +213,6 @@ async function main() {
       const { themePagesFileTasks, nav } = combineThemeMeta(themeMetaConfig, root)
       configWriteTasks.push({
         async before() {
-          const path = join(root, `./.upress/theme`)
-          if (!existsSync(path)) {
-            mkdirSync(path, { recursive: true })
-          }
-        },
-        filePath: `./.upress/theme/index.${lang}`,
-        content: replaceTemplate(readFileSync(join(templateDir, './.upress/theme/_index')).toString(), {
-          themeName: themeMetaConfig.name,
-          theme
-        })
-      })
-      configWriteTasks.push({
-        async before() {
           const path = join(root, `./.upress`)
           if (!existsSync(path)) {
             mkdirSync(path)
@@ -233,6 +220,7 @@ async function main() {
         },
         filePath: `./.upress/config.${lang}`,
         content: replaceTemplate(readFileSync(join(templateDir, './.upress/_config')).toString(), {
+          theme,
           name,
           title,
           nav
