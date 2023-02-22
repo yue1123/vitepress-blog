@@ -1,4 +1,3 @@
-// @ts-ignore
 import { customAlphabet } from 'nanoid'
 import { decode } from 'js-base64'
 
@@ -7,7 +6,8 @@ const cache = new Map<string, string>()
 let mermaid: any
 export async function renderMermaid(encoded: string, options: any) {
   if (!mermaid) {
-    mermaid = (await import('mermaid')).default
+    // @ts-ignore
+    mermaid = (await import('mermaid/dist/mermaid.esm.mjs')).default
     mermaid.startOnLoad = false
     mermaid.initialize({
       startOnLoad: false,
