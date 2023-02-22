@@ -1,4 +1,5 @@
-import mermaid from 'mermaid'
+// @ts-ignore
+import mermaid from 'mermaid/dist/mermaid.esm.mjs'
 import { customAlphabet } from 'nanoid'
 import { decode } from 'js-base64'
 

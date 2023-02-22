@@ -1,6 +1,6 @@
 {
   "name": "upress",
-  "version": "0.0.1-beta.1",
+  "version": "0.0.1-beta.6",
   "description": "Static site generator that base on Markdown. Powered by vite.",
   "packageManager": "pnpm@7.0.0",
   "type": "module",
@@ -17,10 +17,6 @@
     "./client": {
       "types": "./client.d.ts",
       "default": "./dist/client/index.js"
-    },
-    "./theme": {
-      "types": "./theme.d.ts",
-      "default": "./dist/client/theme-default/index.js"
     }
   },
   "bin": {
@@ -33,19 +29,11 @@
     "upress",
     "bin",
     "dist",
-    "package.json",
-    "env.d.ts",
-    "README.md",
-    "README.es.md",
-    "theme.d.ts",
-    "theme-helper.d.ts"
-  ],
-  "workspaces": [
-    "demos/*",
-    "packages/*"
+    "types",
+    "package.json"
   ],
   "scripts": {
-    "test": "tsc && rollup --config rollup.config.ts --configPlugin esbuild && rimraf dist/temp-types",
+    "test": "rimraf dist && tsc && rollup --config rollup.config.ts --configPlugin esbuild && pnpm build-client && rimraf dist/temp-types",
     "dev": "rimraf dist && run-s dev-shared dev-start",
     "dev-start": "run-p dev-client dev-node dev-watch",
     "dev-client": "tsc -w -p src/client",
@@ -60,7 +48,6 @@
     "build_theme_demo": "pnpm run build && pnpm run -C demos/default blog:build"
   },
   "devDependencies": {
-    "@upress/types": "0.0.1",
     "@rollup/plugin-commonjs": "^24.0.0",
     "@rollup/plugin-json": "^6.0.0",
     "@rollup/plugin-node-resolve": "^15.0.1",
@@ -72,9 +59,7 @@
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-esbuild": "^5.0.0",
     "tslib": "^2.4.1",
-    "tsup": "^6.5.0",
     "typescript": "~4.9.5",
-    "vite": "3",
     "@mdit-vue/plugin-component": "^0.11.2",
     "@mdit-vue/plugin-frontmatter": "^0.11.1",
     "@mdit-vue/plugin-headers": "^0.11.2",
@@ -116,9 +101,16 @@
     "markdown-it-attrs": "^4.1.6",
     "markdown-it-container": "^3.0.0",
     "markdown-it-emoji": "^2.0.2",
+    "markdown-it-footnote": "^3.0.3",
+    "markdown-it-image-lazy-loading": "^1.2.0",
+    "markdown-it-imsize": "^2.0.1",
+    "markdown-it-katex": "^2.0.3",
+    "markdown-it-mathjax": "^2.0.0",
+    "markdown-it-sub": "^1.0.0",
+    "markdown-it-sup": "^1.0.0",
+    "markdown-it-task-lists": "^2.1.1",
     "micromatch": "^4.0.5",
     "minimist": "^1.2.7",
-    "nanoid": "3.3.4",
     "npm-run-all": "^4.1.5",
     "ora": "5.4.1",
     "path-to-regexp": "^6.2.1",
@@ -140,6 +132,7 @@
     "wait-on": "^7.0.1"
   },
   "dependencies": {
+    "@upress/types": "workspace:*",
     "@types/plantuml-encoder": "^1.4.0",
     "chalk": "^5.2.0",
     "commander": "^9.4.1",
@@ -149,19 +142,9 @@
     "feed": "^4.2.2",
     "gray-matter": "^4.0.3",
     "js-base64": "^3.7.4",
-    "markdown-it-footnote": "^3.0.3",
-    "markdown-it-image-lazy-loading": "^1.2.0",
-    "markdown-it-imsize": "^2.0.1",
-    "markdown-it-katex": "^2.0.3",
-    "markdown-it-mathjax": "^2.0.0",
-    "markdown-it-sub": "^1.0.0",
-    "markdown-it-sup": "^1.0.0",
-    "markdown-it-task-lists": "^2.1.1",
     "mermaid": "^9.3.0",
     "nanoid": "^4.0.0",
     "plantuml-encoder": "^1.4.0",
-    "prompts": "^2.4.2",
-    "vitepress": "1.0.0-alpha.40",
     "@docsearch/css": "^3.3.2",
     "@docsearch/js": "^3.3.2",
     "@vitejs/plugin-vue": "^4.0.0",

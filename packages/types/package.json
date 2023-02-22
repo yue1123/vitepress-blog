@@ -1,4 +1,6 @@
 {
   "name": "@upress/types",
-  "version": "0.0.1"
+  "version": "0.0.1-beta.1",
+  "description": "typing",
+  "main": "./index.d.ts"
 }

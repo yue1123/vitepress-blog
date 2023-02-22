@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "dependencies": {
     "upress": "workspace:*",
     "@upress/theme-vitepress": "workspace:*",
