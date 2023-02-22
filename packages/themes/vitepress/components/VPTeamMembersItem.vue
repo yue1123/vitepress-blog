@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Theme } from '../theme'
+import type { Theme } from '../types'
 import VPIconHeart from './icons/VPIconHeart.vue'
 import VPLink from './VPLink.vue'
 import VPSocialLinks from './VPSocialLinks.vue'

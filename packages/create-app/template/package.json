@@ -1,6 +1,7 @@
 {
   "name": "untitled",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "upress dev ./",
     "build": "upress build ./",

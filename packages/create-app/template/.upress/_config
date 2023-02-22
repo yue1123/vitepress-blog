@@ -1,10 +1,11 @@
 import { defineConfig } from 'upress'
+import type { Theme } from '{{theme}}/theme'
 
-export default defineConfig({
-  title: '{{title}}',
+export default defineConfig<Theme.Config>({
+  title: `{{title}}`,
   theme: '{{theme}}',
   themeConfig: {
-    name: '{{name}}',
+    name: `{{name}}`,
     nav: [{{nav}}],
     socialLinks: [
       { icon: 'github', link: 'https://github.com/{{name}}' },
@@ -12,7 +13,7 @@ export default defineConfig({
     filePathToTags: [
       {
         test: /\/notes\\/,
-        tag: '随笔'
+        tag: '笔记'
       }
     ],
     sortBy: 'CREATE_TIME',

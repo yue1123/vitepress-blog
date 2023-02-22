@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import type { Theme } from '../theme'
+import type { Theme } from '../types'
 import { useSidebarControl } from '../composables/sidebar'
 import VPIconChevronRight from './icons/VPIconChevronRight.vue'
 import VPLink from './VPLink.vue'

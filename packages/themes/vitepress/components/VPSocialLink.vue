@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { Theme } from '../theme'
+import type { Theme } from '../types'
 import { computed } from 'vue'
 import { icons } from '../support/socialIcons'
 

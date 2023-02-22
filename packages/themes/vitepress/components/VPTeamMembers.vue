@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Theme } from '../theme'
+import type { Theme } from '../types'
 import { computed } from 'vue'
 import VPTeamMembersItem from './VPTeamMembersItem.vue'
 

@@ -2,7 +2,7 @@
   "name": "create-upress",
   "description": "Create starter template for upress",
   "authors": "yue1123",
-  "version": "0.0.1-beta.4",
+  "version": "0.0.1-beta.8",
   "main": "dist/index.js",
   "bin": {
     "create-upress": "bin/create-app.js"
