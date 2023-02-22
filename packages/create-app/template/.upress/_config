@@ -12,7 +12,7 @@ export default defineConfig<Theme.Config>({
     ],
     filePathToTags: [
       {
-        test: /\/notes\\/,
+        test: /\/notes\//,
         tag: '笔记'
       }
     ],

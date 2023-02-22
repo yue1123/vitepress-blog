@@ -52,15 +52,15 @@ export function usePostListWithPagination() {
 
   const prevDisabled = computed<boolean>(() => currentPage.value === 1)
   const nextDisabled = computed<boolean>(() => currentPage.value === totalPage.value)
-  if (import.meta.hot) {
-    console.log(allPostModule)
-    // import.meta.hot.accept([allPostModule], (newModule) => {
-    //   if (newModule) {
-    //     // newModule is undefined when SyntaxError happened
-    //     console.log('updated: count is now ', newModule.count)
-    //   }
-    // })
-  }
+  // if (import.meta.hot) {
+  //   console.log(allPostModule)
+  //   // import.meta.hot.accept([allPostModule], (newModule) => {
+  //   //   if (newModule) {
+  //   //     // newModule is undefined when SyntaxError happened
+  //   //     console.log('updated: count is now ', newModule.count)
+  //   //   }
+  //   // })
+  // }
   return {
     /**
      * 下一页

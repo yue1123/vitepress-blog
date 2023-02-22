@@ -13,7 +13,7 @@ export default defineConfig({
     socialLinks: [{ icon: 'github', link: 'https://github.com/{{name}}' }],
     filePathToTags: [
       {
-        test: /\/notes\\/,
+        test: /\/notes\//,
         tag: '随笔'
       }
     ],

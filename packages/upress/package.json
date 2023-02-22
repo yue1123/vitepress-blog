@@ -1,6 +1,6 @@
 {
   "name": "upress",
-  "version": "0.0.1-beta.6",
+  "version": "0.0.1-beta.7",
   "description": "Static site generator that base on Markdown. Powered by vite.",
   "packageManager": "pnpm@7.0.0",
   "type": "module",
