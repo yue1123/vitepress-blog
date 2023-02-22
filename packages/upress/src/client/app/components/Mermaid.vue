@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, getCurrentInstance, ref, watch, nextTick } from 'vue'
+import { getCurrentInstance, ref, watch, nextTick, watchEffect } from 'vue'
 import { useData } from '../data'
 import { renderMermaid } from '../modules/mermaid'
 import ShadowRoot from './ShadowRoot.vue'
@@ -15,10 +15,11 @@ const vm = getCurrentInstance()
 const { isDark } = useData()
 const loading = ref<boolean>(true)
 const error = ref<string>()
-const svgObj = computed(() => {
+const html = ref('')
+watchEffect(async () => {
   loading.value = true
   try {
-    return renderMermaid(props.code || '', {
+    html.value = await renderMermaid(props.code || '', {
       theme: props.theme || (isDark.value ? 'dark' : undefined),
       ...vm!.attrs
     })
@@ -30,7 +31,6 @@ const svgObj = computed(() => {
     })
   }
 })
-const html = computed(() => svgObj.value)
 const actualHeight = ref<number>()
 const actualWidth = ref<number>()
 
