@@ -24,7 +24,7 @@ export interface Props {
   title: string
   snippets?: string
   coverImg?: string
-  createTime: number
+  createTime: number | string
   localePath: string
   url: string
   top?: boolean
@@ -88,8 +88,10 @@ const coverImg = computed(() => {
     margin: 15px 0 15px 25px;
     border-radius: 3px;
     overflow: hidden;
+    flex-shrink: 0;
+    display: none;
     @media screen and (min-width: 768px) {
-      flex-shrink: 0;
+      display: inline-block;
     }
   }
 }

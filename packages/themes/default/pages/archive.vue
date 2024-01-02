@@ -35,7 +35,7 @@
     onYearAppend(year) {
       return {
         type: 'year',
-        title: `${year}年`
+        title: `${year} 年`
       }
     },
     onMonthAppend(month) {
@@ -57,10 +57,10 @@
       padding-bottom: 15px;
       display: flex;
       padding: 10px 0;
-      $node-width: 25px;
+      $node-width: 30px;
       &.year {
         &:not(:first-child) {
-          margin-top: 15px;
+          margin-top: 30px;
         }
         .timeline-item-wrapper {
           font-size: 36px;
@@ -76,7 +76,7 @@
         left: calc($node-width / 2);
         width: 0;
         top: calc(50% - calc($node-width / 2));
-        bottom: -$node-width;
+        bottom: -40px;
         border-left: 1px dashed var(--vp-c-divider);
       }
       &-node {

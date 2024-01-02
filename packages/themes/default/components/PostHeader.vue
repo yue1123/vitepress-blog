@@ -4,11 +4,7 @@
       {{ frontmatter.title }}
       <Badge v-if="frontmatter.top" type="tip" text="置顶" />
     </h1>
-    <PostMeta
-      class="meta"
-      :tags="frontmatter.tags"
-      :createTime="frontmatter.createTime"
-    />
+    <PostMeta class="meta" :tags="frontmatter.tags" :createTime="frontmatter.createTime" />
   </div>
   <div class="post_header-img" v-if="frontmatter.coverImg">
     <img :src="coverImg" alt="" />

@@ -1,6 +1,6 @@
 <template>
   <PostItem
-    v-for="item in postList"
+    v-for="item in allPostList"
     v-bind="item"
     :localePath="site.base"
   ></PostItem>
@@ -10,5 +10,5 @@
 import { usePostListWithPagination } from 'upress'
 import { useData } from 'upress'
 const { site } = useData()
-const { postList } = usePostListWithPagination()
+const { allPostList } = usePostListWithPagination()
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div class="post_header-meta space-x-4">
     <div class="space-x-1">
-      <BIconCalendar />
+      <BIconCalendar2Event />
       <span>{{ createTime }}</span>
     </div>
     <template v-if="props.tags">
@@ -18,10 +18,10 @@
 
 <script setup lang="ts">
   import { useFriendlyDate } from 'upress'
-  import { BIconTags, BIconCalendar } from 'bootstrap-icons-vue'
+  import { BIconTags, BIconCalendar2Event } from 'bootstrap-icons-vue'
   export interface PostMetaProps {
     tags?: string[]
-    createTime: number
+    createTime: number | string
   }
   const props = defineProps<PostMetaProps>()
   const createTime = useFriendlyDate(props.createTime)
