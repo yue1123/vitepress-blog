@@ -90,6 +90,7 @@ const coverImg = computed(() => {
     overflow: hidden;
     flex-shrink: 0;
     display: none;
+    line-height: 0;
     @media screen and (min-width: 768px) {
       display: inline-block;
     }
