@@ -26,7 +26,7 @@ type Option = {
 
 export function useArchivesList(option?: Option) {
   const { onYearAppend, onMonthAppend } = option || {}
-  const { allPostList } = usePostListWithPagination()
+  const { allPostList } = usePostListWithPagination('CREATE_TIME')
   const data = Object.create(null)
   return computed<(ArchivesListItem | AppendItem)[]>(() => {
     for (const post of allPostList.value) {
@@ -51,11 +51,12 @@ export function useArchivesList(option?: Option) {
       data[year][month].push(post)
     }
     let archivesList: any = []
-    for (const yearItem of Object.values(data)) {
+    for (const yearItem of Object.values(data).reverse()) {
       for (const monthItem of Object.values(yearItem as Record<string, any>)) {
         archivesList.push.apply(archivesList, monthItem)
       }
     }
+    console.log(archivesList)
     return archivesList
   })
 }

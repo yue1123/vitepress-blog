@@ -18,22 +18,24 @@ const sortByHandleMap: Record<SortType | 'TOP', (...arg: any[]) => number> = {
 }
 
 const allPostModule = import.meta.glob('/posts/**/*.md', { eager: true })
-export function usePostListWithPagination() {
+export function usePostListWithPagination(_sortBy?: SortType) {
   let postArr = Object.values(allPostModule)
   const themeConfig = unref(useData().theme)
   const { size }: { size: number } = themeConfig.pagination
-  const sortBy: SortType = themeConfig.sortBy
-  const allPostList = shallowRef()
+  const allPostList = shallowRef<any[]>([])
   const totalPage = ref<number>(Math.ceil(postArr.length / size))
+  const sortBy: SortType = _sortBy || themeConfig.sortBy
   const currentPage = ref<number>(1)
   const sort = () => {
     // sort by user config and top
     postArr = postArr.sort(sortByHandleMap[sortBy]).sort(sortByHandleMap['TOP'])
     allPostList.value = postArr.map<UPressData>((item: any) => {
       const { __pageData: pageData } = item
+      const url = pageData.relativePath.replace('.md', '')
       return {
-        url: '/' + pageData.relativePath.replace('.md', ''),
-        ...pageData.frontmatter
+        url: '/' + url,
+        ...pageData.frontmatter,
+        title: url.split('/').pop()
       }
     })
   }

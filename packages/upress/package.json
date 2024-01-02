@@ -43,7 +43,7 @@
     "build": "run-s build-prepare build-client build-node",
     "build-prepare": "rimraf dist && node scripts/copyShared",
     "build-client": "vue-tsc --noEmit -p src/client && tsc -p src/client",
-    "build-node": "tsc -p src/node --noEmit && rollup --config rollup.config.ts --configPlugin esbuild",
+    "build-node": "tsc -p src/node && rollup --config rollup.config.ts --configPlugin esbuild",
     "link_pnpm": "pnpm link --global",
     "build_theme_demo": "pnpm run build && pnpm run -C demos/default blog:build"
   },
