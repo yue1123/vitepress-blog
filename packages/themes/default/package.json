@@ -1,6 +1,6 @@
 {
   "name": "@upress/theme-default",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "./index",
   "module": "./index",
   "exports": {
